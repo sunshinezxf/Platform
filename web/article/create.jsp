@@ -1,0 +1,91 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: sunshine
+  Date: 15/7/22
+  Time: 19:32
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="path" value="${pageContext.request.contextPath}"></c:set>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css"
+          href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${path.concat('/material/css/dashboard.css')}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${path.concat('/material/plugins/Font-Awesome-master/css/font-awesome.css')}"/>
+    <link rel="stylesheet" type="text/css"
+          href="${path.concat('/material/plugins/summernote-master/dist/summernote.css')}"/>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/summernote-master/dist/summernote.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/summernote-master/lang/summernote-zh-CN.js')}"></script>
+    <title>创建文章</title>
+    <script>
+        $(document).ready(function () {
+            $("#summernote").summernote({
+                lang: "zh-CN",
+                height: 300
+            });
+        });
+    </script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">平台——文章</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#">退出</a></li>
+            </ul>
+            <form class="navbar-form navbar-right">
+                <input type="text" class="form-control" placeholder="搜索文章...">
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+            <ul class="nav nav-sidebar">
+                <li class="active"><a href="#">发表图文<span class="sr-only">(current)</span></a></li>
+                <li><a href="#">图文管理</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">素材管理</h1>
+            <section class="content">
+                <form>
+                    <div class="form-group">
+                        <label for="input-article-title">文章标题</label>
+                        <input type="text" class="form-control" id="input-article-title" placeholder="文章标题">
+                    </div>
+                    <div class="form-group">
+                        <label for="input-article-author">文章作者</label>
+                        <input type="text" class="form-control" id="input-article-author" placeholder="文章作者">
+                    </div>
+                    <div class="form-group">
+                        <label>文章导读</label>
+
+                        <div id="summernote" class="form-control"></div>
+                    </div>
+                    <button class="btn btn-info">下一步</button>
+                </form>
+            </section>
+        </div>
+    </div>
+</div>
+</body>
+</html>
