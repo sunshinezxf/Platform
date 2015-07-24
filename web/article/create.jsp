@@ -32,9 +32,27 @@
     <title>创建文章</title>
     <script>
         $(document).ready(function () {
-            $("#summernote").summernote({
+            $("#input-article-guidance").summernote({
                 lang: "zh-CN",
-                height: 300
+                height: 290
+            });
+            $("#input-article-content").summernote({
+                lang: "zh-CN",
+                height: 430
+            });
+            $("#next-step").click(function () {
+                $("#first-step").hide();
+                $("#second-step").fadeIn("slow");
+            });
+            $("#previous-step").click(function () {
+                $("#second-step").hide();
+                $("#first-step").fadeIn("slow");
+            });
+            $("#submit").click(function () {
+                var title = $("#input-article-title").val();
+                var author = $("#input-article-author").val();
+                var guidance = $("#input-article-guidance").code();
+                var contect = $("#input-article-content").code();
             });
         });
     </script>
@@ -67,7 +85,7 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header">素材管理</h1>
             <section class="content">
-                <form>
+                <div id="first-step" style="display: block;">
                     <div class="form-group">
                         <label for="input-article-title">文章标题</label>
                         <input type="text" class="form-control" id="input-article-title" placeholder="文章标题">
@@ -79,13 +97,25 @@
                     <div class="form-group">
                         <label>文章导读</label>
 
-                        <div id="summernote" class="form-control"></div>
+                        <div id="input-article-guidance" class="form-control"></div>
                     </div>
-                    <button class="btn btn-info">下一步</button>
-                </form>
+                    <button class="btn btn-info" id="next-step">下一步 &gt;&gt;</button>
+                </div>
+                <div id="second-step" style="display: none;">
+                    <div class="form-group">
+                        <label>文章内容</label>
+
+                        <div id="input-article-content" class="form-control"></div>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info" id="previous-step">&lt;&lt; 上一步</button>
+                        <button class="btn btn-success" id="submit">保存图文</button>
+                    </div>
+                </div>
             </section>
         </div>
     </div>
 </div>
 </body>
+<script type="text/css" src="${path.concat('/material/js/article.js')}"></script>
 </html>
