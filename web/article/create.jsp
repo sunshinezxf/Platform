@@ -24,6 +24,8 @@
     <script type="text/javascript"
             src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
     <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-migrate-1.2.1.min.js')}"></script>
+    <script type="text/javascript"
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/summernote-master/dist/summernote.js')}"></script>
@@ -52,9 +54,18 @@
                 var title = $("#input-article-title").val();
                 var author = $("#input-article-author").val();
                 var guidance = $("#input-article-guidance").code();
-                var contect = $("#input-article-content").code();
+                var content = $("#input-article-content").code();
+                var url = ${path} +"/article/create";
+                console.debug("title: " + title);
+                console.debug("author: " + author);
+                console.debug("guidance: " + guidance);
+                console.debug("content: " + content);
+                $.post(url, {title: title, author: author, guidance: guidance, content: content}, function (result) {
+                    alert(result);
+                });
             });
-        });
+        })
+        ;
     </script>
 </head>
 <body>
