@@ -11,7 +11,6 @@ import platform.sunshine.form.LoginForm;
  * Created by sunshine on 15/8/13.
  */
 @RestController
-@RequestMapping("/")
 public class PlatformController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
