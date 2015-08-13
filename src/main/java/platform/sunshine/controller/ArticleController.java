@@ -31,7 +31,7 @@ public class ArticleController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
-    public Map<String, Object> create(@Valid ArticleForm articleForm, BindingResult result, HttpServletResponse response) throws IOException {
+    public Map<String, Object> create(@Valid ArticleForm articleForm, BindingResult result) throws IOException {
         Map<String, Object> params = new HashMap<String, Object>();
         if (result.hasErrors()) {
             params.put("status", ResposeCode.RESPONSE_ERROR);

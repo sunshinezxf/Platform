@@ -17,6 +17,9 @@
           href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
     <link rel="stylesheet" href="${path.concat('/material/css/signin.css')}"/>
 </head>
+<script>
+
+</script>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
@@ -60,7 +63,7 @@
             </label>
         </div>
         <button type="submit" class="btn btn-lg btn-primary btn-block btn-info">
-            Submit
+            登录
         </button>
     </form>
 </div>
