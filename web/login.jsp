@@ -16,6 +16,7 @@
     <link rel="stylesheet"
           href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
     <link rel="stylesheet" href="${path.concat('/material/css/signin.css')}"/>
+    <title>登录</title>
 </head>
 <script>
 
@@ -28,8 +29,8 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">登录</a></li>
-                <li><a href="#">注册</a></li>
+                <li><a href="${path.concat('/login')}">登录</a></li>
+                <li><a href="${path.concat('/register')}">注册</a></li>
             </ul>
         </div>
     </div>
