@@ -1,4 +1,4 @@
-package platform.sunshine;
+package platform.sunshine.vo;
 
 import platform.sunshine.model.Article;
 import platform.sunshine.model.ArticlePaymentStatus;

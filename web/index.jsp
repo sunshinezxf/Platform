@@ -7,10 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
+<head>
     <title></title>
-  </head>
-  <body>
+    <meta http-equiv='refresh' content='0;url=login'>
+</head>
+<body>
 
-  </body>
+</body>
 </html>

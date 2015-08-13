@@ -55,13 +55,13 @@
                 var author = $("#input-article-author").val();
                 var guidance = $("#input-article-guidance").code();
                 var content = $("#input-article-content").code();
-                var url = ${path} +"/article/create";
+                var url = "${path.concat('/article/create')}";
                 console.debug("title: " + title);
                 console.debug("author: " + author);
                 console.debug("guidance: " + guidance);
                 console.debug("content: " + content);
                 $.post(url, {title: title, author: author, guidance: guidance, content: content}, function (result) {
-                    alert(result);
+                    location.replace('${path}' + result.url);
                 });
             });
         })

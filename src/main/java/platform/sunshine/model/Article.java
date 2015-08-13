@@ -22,8 +22,8 @@ public class Article {
         this();
         this.title = title;
         this.author = author;
-        this.guidance = guidance;
-        this.content = content;
+        this.guidance = guidance.replaceAll("<img", "</p><p><img style=\"width: 100%\"").replaceAll("<p></p>", "");
+        this.content = content.replaceAll("<img", "</p><p><img style=\"width: 100%\"").replaceAll("<p></p>", "");
     }
 
     public Article(ArticleForm form) {
