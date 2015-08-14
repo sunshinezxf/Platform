@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * Created by sunshine on 15/7/26.
  */
 public class Article {
+    private String articleId;
     private String title;
     private String author;
     private String guidance;
@@ -28,6 +29,14 @@ public class Article {
 
     public Article(ArticleForm form) {
         this(form.getTitle(), form.getAuthor(), form.getGuidance(), form.getContent());
+    }
+
+    public String getArticleId() {
+        return articleId;
+    }
+
+    public void setArticleId(String articleId) {
+        this.articleId = articleId;
     }
 
     public String getTitle() {
