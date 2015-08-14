@@ -12,6 +12,13 @@ import platform.sunshine.form.LoginForm;
  */
 @RestController
 public class PlatformController {
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public ModelAndView index() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("index");
+        return view;
+    }
+
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public ModelAndView register() {
         ModelAndView view = new ModelAndView();
