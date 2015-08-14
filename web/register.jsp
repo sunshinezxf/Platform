@@ -18,6 +18,12 @@
     <link rel="stylesheet"
           href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
     <link rel="stylesheet" href="${path.concat('/material/css/signin.css')}"/>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-migrate-1.2.1.min.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
     <title>注册</title>
 </head>
 <body>
@@ -48,6 +54,14 @@
             <input type="email" class="form-control" id="account_email"
                    placeholder="邮箱" required="" autocomplete="off">
         </div>
+        <div class="form-group has-feedback" data-toggle="tooltip" id="account_username_div">
+            <label for="account_username" class="sr-only">
+                Password
+            </label>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <input type="text" class="form-control"
+                   id="account_username" placeholder="姓名" required="" autocomplete="off">
+        </div>
         <div class="form-group has-feedback">
             <label for="account_password" class="sr-only">
                 Password
@@ -57,7 +71,7 @@
                    id="account_password" placeholder="密码" required="" autocomplete="off">
         </div>
         <div class="form-group has-feedback">
-            <label for="confirm_account_password" cla   ss="sr-only">
+            <label for="confirm_account_password" class="sr-only">
                 Confirm Password
             </label>
             <span class="glyphicon glyphicon-flag form-control-feedback"></span>
