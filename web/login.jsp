@@ -13,6 +13,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon"
+          href="${path.concat('/material/ico/logo.ico')}"/>
     <link rel="stylesheet"
           href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
     <link rel="stylesheet" href="${path.concat('/material/css/signin.css')}"/>
@@ -45,9 +47,9 @@
             <label for="account_email" class="sr-only">
                 Email address
             </label>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
             <input type="email" class="form-control" id="account_email"
-                   placeholder="邮箱" required="">
+                   placeholder="邮箱" required="" autocomplete="off">
         </div>
         <div class="form-group has-feedback">
             <label for="account_password" class="sr-only">
@@ -55,7 +57,7 @@
             </label>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             <input type="password" class="form-control"
-                   id="account_password" placeholder="密码" required="">
+                   id="account_password" placeholder="密码" required="" autocomplete="off">
         </div>
         <div class="checkbox">
             <label>
