@@ -18,10 +18,28 @@
     <link rel="stylesheet"
           href="${path.concat('/material/plugins/bootstrap-3.3.5-dist/css/bootstrap.css')}"/>
     <link rel="stylesheet" href="${path.concat('/material/css/signin.css')}"/>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/jquery/jquery-migrate-1.2.1.min.js')}"></script>
+    <script type="text/javascript"
+            src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
+    <script type="text/javascript" src="${path.concat("/material/js/validate.js")}"></script>
     <title>登录</title>
 </head>
 <script>
-
+    $(document).ready(function () {
+        $("#account_email").bind("input propertychange", function () {
+            if (login_validate()) {
+                $("#lgbtn").removeAttribute("disabled");
+            }
+        });
+        $("#account_password").bind("input propertychange", function () {
+            if (login_validate()) {
+                $("#lgbtn").removeAttr("disabled");
+            }
+        })
+    });
 </script>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -65,8 +83,7 @@
                 记住我
             </label>
         </div>
-        <button type="submit" class="btn btn-lg btn-primary btn-block btn-info">
-            登录
+        <button type="submit" class="btn btn-lg btn-primary btn-block btn-info" id="lgbtn" disabled="disabled">登录
         </button>
     </form>
 </div>
