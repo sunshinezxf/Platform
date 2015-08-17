@@ -38,6 +38,11 @@
             if (login_validate()) {
                 $("#lgbtn").removeAttr("disabled");
             }
+        });
+        $("#lgbtn").click(function () {
+            $("#lg-form").attr("action", "${path.concat('/login')}");
+            $("#lg-form").attr("method", "post");
+            $("lg-form").submit();
         })
     });
 </script>
@@ -56,7 +61,7 @@
     </div>
 </nav>
 <div class="container">
-    <form class="form-signin">
+    <form class="form-signin" id="lg-form">
         <h2 class="form-signin-heading">
             登录
         </h2>
@@ -66,7 +71,7 @@
                 Email address
             </label>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            <input type="email" class="form-control" id="account_email"
+            <input type="email" class="form-control" id="account_email" name="email"
                    placeholder="邮箱" required="" autocomplete="off">
         </div>
         <div class="form-group has-feedback">
@@ -74,7 +79,7 @@
                 Password
             </label>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            <input type="password" class="form-control"
+            <input type="password" class="form-control" name="password"
                    id="account_password" placeholder="密码" required="" autocomplete="off">
         </div>
         <div class="checkbox">

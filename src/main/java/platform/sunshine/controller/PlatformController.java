@@ -1,5 +1,7 @@
 package platform.sunshine.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,6 +14,8 @@ import platform.sunshine.form.LoginForm;
  */
 @RestController
 public class PlatformController {
+    Logger logger = LoggerFactory.getLogger(PlatformController.class);
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
         ModelAndView view = new ModelAndView();
@@ -40,6 +44,10 @@ public class PlatformController {
             view.setViewName("login");
             return view;
         }
+        String username = loginForm.getEmail();
+        String password = loginForm.getPassword();
+        logger.debug("username: " + username);
+        logger.debug("password: " + password);
         view.setViewName("/article/create");
         return view;
     }
