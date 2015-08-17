@@ -14,7 +14,7 @@ import platform.sunshine.form.LoginForm;
  */
 @RestController
 public class PlatformController {
-    Logger logger = LoggerFactory.getLogger(PlatformController.class);
+    private Logger logger = LoggerFactory.getLogger(PlatformController.class);
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
