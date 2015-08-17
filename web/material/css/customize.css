@@ -1,0 +1,16 @@
+.logo {
+    display: block;
+    height: 100px;
+    text-align: left;
+}
+
+.sidebar {
+    letter-spacing: 2.3px;
+    border-top: 1px solid #dbdbdb;
+    border-bottom: 1px solid #fff;
+}
+
+.sidebar li {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #dbdbdb;
+}

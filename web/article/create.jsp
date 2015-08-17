@@ -23,6 +23,7 @@
           href="${path.concat('/material/plugins/Font-Awesome-master/css/font-awesome.css')}"/>
     <link rel="stylesheet" type="text/css"
           href="${path.concat('/material/plugins/summernote-master/dist/summernote.css')}"/>
+    <link rel="stylesheet" type="text/css" href="${path.concat('/material/css/customize.css')}"/>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
     <script type="text/javascript"
@@ -90,7 +91,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
+            <div class="logo">
+                <img src="${path.concat('/material/image/logo.png')}"/>
+            </div>
             <ul class="nav nav-sidebar">
+                <li><a href="#">个人中心</a></li>
+                <li><a href="#">图文管理</a></li>
                 <li class="active"><a href="#">发表图文<span class="sr-only">(current)</span></a></li>
                 <li><a href="#">图文管理</a></li>
             </ul>
