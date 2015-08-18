@@ -46,7 +46,7 @@ public class PlatformController {
         }
         String username = loginForm.getEmail();
         logger.debug("username: " + username);
-        view.setViewName("/article/create");
+        view.setViewName("redirect:/article/create");
         return view;
     }
 }
