@@ -31,12 +31,16 @@
     $(document).ready(function () {
         $("#account_email").bind("input propertychange", function () {
             if (login_validate()) {
-                $("#lgbtn").removeAttribute("disabled");
+                $("#lgbtn").removeAttr("disabled");
+            } else {
+                $("#lgbtn").attr("disabled", "disabled");
             }
         });
         $("#account_password").bind("input propertychange", function () {
             if (login_validate()) {
                 $("#lgbtn").removeAttr("disabled");
+            } else {
+                $("#lgbtn").attr("disabled", "disabled");
             }
         });
         $("#lgbtn").click(function () {

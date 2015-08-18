@@ -5,7 +5,9 @@ function login_validate() {
     var username = $("#account_email").val();
     var password = $("#account_password").val();
     if (not_null(username) && not_null(password)) {
-        return true;
+        if(email_validate(username)) {
+            return true;
+        }
     }
     return false;
 }
@@ -15,4 +17,9 @@ function not_null(item) {
         return false;
     }
     return true;
+}
+
+function email_validate(email) {
+    var pattern = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/;
+    return pattern.test(email);
 }

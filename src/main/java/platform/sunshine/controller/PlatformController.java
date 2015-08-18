@@ -45,9 +45,7 @@ public class PlatformController {
             return view;
         }
         String username = loginForm.getEmail();
-        String password = loginForm.getPassword();
         logger.debug("username: " + username);
-        logger.debug("password: " + password);
         view.setViewName("/article/create");
         return view;
     }
