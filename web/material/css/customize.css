@@ -8,6 +8,8 @@
     letter-spacing: 2.3px;
     border-top: 1px solid #dbdbdb;
     border-bottom: 1px solid #fff;
+    background-color: #FFFFFC;
+    opacity: 0.8;
 }
 
 .sidebar li {

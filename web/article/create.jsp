@@ -115,6 +115,20 @@
                     </div>
                     <div class="form-group">
                         <label>文章导读</label>
+                        <br>
+
+                        <div class="btn-group btn-group-sm">
+                            <label id="guidance-auto" class="radio-inline">
+                                <input id="guidance-radio-auto" name="guidance-radio" type="radio" arial-label="auto"
+                                       checked="checked"><label for="guidance-radio-auto">导读自动生成</label>
+                            </label>
+                            <label id="guidance-hand" class="radio-inline">
+                                <input id="guidance-radio-hand" name="guidance-radio" type="radio"
+                                       arial-label="hand"><label
+                                    for="guidance-radio-hand">导读手动添加</label>
+                            </label>
+                        </div>
+                        <br>
 
                         <div id="input-article-guidance" class="form-control"></div>
                     </div>
