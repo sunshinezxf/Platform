@@ -53,6 +53,12 @@
                 $("#second-step").hide();
                 $("#first-step").fadeIn("slow");
             });
+            $("#guidance-radio-hand").click(function () {
+                $("#guidance-edit").fadeIn("slow");
+            });
+            $("#guidance-radio-auto").click(function () {
+                $("#guidance-edit").hide();
+            });
             $("#submit").click(function () {
                 var title = $("#input-article-title").val();
                 var author = $("#input-article-author").val();
@@ -118,11 +124,11 @@
                         <br>
 
                         <div class="btn-group btn-group-sm">
-                            <label id="guidance-auto" class="radio-inline">
+                            <label class="radio-inline">
                                 <input id="guidance-radio-auto" name="guidance-radio" type="radio" arial-label="auto"
                                        checked="checked"><label for="guidance-radio-auto">导读自动生成</label>
                             </label>
-                            <label id="guidance-hand" class="radio-inline">
+                            <label class="radio-inline">
                                 <input id="guidance-radio-hand" name="guidance-radio" type="radio"
                                        arial-label="hand"><label
                                     for="guidance-radio-hand">导读手动添加</label>
@@ -130,7 +136,9 @@
                         </div>
                         <br>
 
-                        <div id="input-article-guidance" class="form-control"></div>
+                        <div id="guidance-edit" style="display: none;">
+                            <div id="input-article-guidance" class="form-control"></div>
+                        </div>
                     </div>
                     <button class="btn btn-info" id="next-step">下一步 &gt;&gt;</button>
                 </div>
