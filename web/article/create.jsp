@@ -65,16 +65,40 @@
                 var guidance = $("#input-article-guidance").code();
                 var content = $("#input-article-content").code();
                 var url = "${path.concat('/article/create')}";
+                $("input:radio").each(function () {
+                    if ($(this).attr("checked") == "checked" && $(this).attr("arial-label") == "auto") {
+                        var begin = 0;
+                        var end = getEndOfGuidance(content);
+                        guidance = content.substring(begin, end);
+                        return false;
+                    }
+                });
                 console.debug("title: " + title);
                 console.debug("author: " + author);
                 console.debug("guidance: " + guidance);
                 console.debug("content: " + content);
-                $.post(url, {title: title, author: author, guidance: guidance, content: content}, function (result) {
+                $.post(url, {
+                    title: title,
+                    author: author,
+                    guidance: guidance,
+                    content: content
+                }, function (result) {
                     location.replace('${path}' + result.url);
                 });
             });
         })
-        ;
+        function getEndOfGuidance(content) {
+            var end;
+            if ((end = content.indexOf("</p>")) > 0) {
+                return content.indexOf("</p>", end + 4);
+            } else if ((end = content.indexOf("。")) > 0) {
+                return content.indexOf("。");
+            } else if ((end = content.indexOf(".")) > 0) {
+                return end;
+            } else {
+                return content.substring(0, 20) + "..."
+            }
+        }
     </script>
 </head>
 <body>
