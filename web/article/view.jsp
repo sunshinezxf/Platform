@@ -31,6 +31,16 @@
 </head>
 <script>
     $(document).ready(function () {
+        var flag = true;
+        $("#article-guidance").click(function () {
+            if (flag == true) {
+                $("#article-guidance-content").show();
+                flag = false;
+            } else {
+                $("#article-guidance-content").hide();
+                flag = true;
+            }
+        });
         $("#reward").click(function () {
             var url = "${path.concat('/article/reward')}";
             $.post(url, function (result) {
@@ -52,9 +62,13 @@
                                                                                     pattern="yyyy年MM月dd日"/></div>
             <div class="blog-post-preview">
                 <div class="alert alert-info blog-post-guidance">
-                    <span class="label label-info" id="article-guidance">文章导读</span>
+                    <span class="label label-info" id="article-guidance">文章导读
+                    </span>
 
-                    <div id="article-guidance-content">
+                    <div id="article-guidance-content"
+                            <c:if test="${vo.paymentStatus eq paymentstatus}">
+                                style="display:none;"
+                            </c:if>>
                         <hr/>
                         ${vo.article.guidance}
                     </div>
