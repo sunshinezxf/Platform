@@ -58,6 +58,7 @@
             });
             $("#guidance-radio-auto").click(function () {
                 $("#guidance-edit").hide();
+                $("#input-article-guidance").code("")
             });
             $("#submit").click(function () {
                 var title = $("#input-article-title").val();
