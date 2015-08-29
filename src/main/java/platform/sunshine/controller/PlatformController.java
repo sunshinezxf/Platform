@@ -34,7 +34,10 @@ public class PlatformController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public ModelAndView register(RegisterForm registerForm, BindingResult result) {
         ModelAndView view = new ModelAndView();
-
+        if (result.hasErrors()) {
+            view.setViewName("register");
+            return view;
+        }
         return view;
     }
 
