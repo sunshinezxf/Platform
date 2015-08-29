@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.LoginForm;
+import platform.sunshine.form.RegisterForm;
 
 /**
  * Created by sunshine on 15/8/13.
@@ -27,6 +28,13 @@ public class PlatformController {
     public ModelAndView register() {
         ModelAndView view = new ModelAndView();
         view.setViewName("register");
+        return view;
+    }
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ModelAndView register(RegisterForm registerForm, BindingResult result) {
+        ModelAndView view = new ModelAndView();
+
         return view;
     }
 
