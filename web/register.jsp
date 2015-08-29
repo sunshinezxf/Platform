@@ -24,7 +24,40 @@
             src="${path.concat('/material/plugins/jquery/jquery-migrate-1.2.1.min.js')}"></script>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
+    <script type="text/javascript" src="${path.concat("/material/js/validate.js")}"></script>
     <title>注册</title>
+    <script>
+        $(document).ready(function () {
+            $("#account_email").bind("input propertychange", function () {
+                if (register_validate()) {
+                    $("#rbtn").removeAttr("disabled");
+                } else {
+                    $("#rbtn").attr("disabled", "disabled");
+                }
+            });
+            $("#account_username").bind("input propertychange", function () {
+                if (register_validate()) {
+                    $("#rbtn").removeAttr("disabled");
+                } else {
+                    $("#rbtn").attr("disabled", "disabled");
+                }
+            });
+            $("#account_password").bind("input propertychange", function () {
+                if (register_validate()) {
+                    $("#rbtn").removeAttr("disabled");
+                } else {
+                    $("#rbtn").attr("disabled", "disabled");
+                }
+            });
+            $("#confirm_account_password").bind("input propertychange", function () {
+                if (register_validate()) {
+                    $("#rbtn").removeAttr("disabled");
+                } else {
+                    $("#rbtn").attr("disabled", "disabled");
+                }
+            });
+        })
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -78,7 +111,7 @@
             <input type="password" class="form-control"
                    id="confirm_account_password" placeholder="确认密码" required="" autocomplete="off">
         </div>
-        <button type="submit" class="btn btn-lg btn-primary btn-block btn-info">
+        <button type="submit" class="btn btn-lg btn-primary btn-block btn-info" id="rbtn" disabled="disabled">
             注册
         </button>
     </form>

@@ -5,9 +5,20 @@ function login_validate() {
     var username = $("#account_email").val();
     var password = $("#account_password").val();
     if (not_null(username) && not_null(password)) {
-        if(email_validate(username)) {
+        if (email_validate(username)) {
             return true;
         }
+    }
+    return false;
+}
+
+function register_validate() {
+    var email = $("#account_email").val();
+    var name = $("#account_username").val();
+    var password = $("#account_password").val();
+    var verify_password = $("#confirm_account_password").val();
+    if (not_null(email) && not_null(name) && not_null(password) && not_null(verify_password)) {
+        return true;
     }
     return false;
 }
