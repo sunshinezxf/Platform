@@ -6,6 +6,7 @@ import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.ArticleForm;
 import platform.sunshine.model.Article;
 import platform.sunshine.model.ArticlePaymentStatus;
+import platform.sunshine.utils.Encryption;
 import platform.sunshine.utils.ResposeCode;
 import platform.sunshine.vo.ArticleViewVO;
 
@@ -37,15 +38,13 @@ public class ArticleController {
             params.put("status", ResposeCode.RESPONSE_ERROR);
             return params;
         }
-        System.out.println("title: " + articleForm.getTitle());
-        System.out.println("author: " + articleForm.getAuthor());
-        System.out.println("guidance: " + articleForm.getGuidance());
-        System.out.println("content: " + articleForm.getContent());
         Article article = new Article(articleForm);
+        String preparedArticleId = Encryption.md5(article.getTitle() + article.getCreateAt());
+        article.setArticleId(preparedArticleId);
         vo.setArticle(article);
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_NOT_PAYED);
         params.put("status", ResposeCode.RESPONSE_OK);
-        params.put("url", "/article/123");
+        params.put("url", "/article/" + preparedArticleId);
         return params;
     }
 

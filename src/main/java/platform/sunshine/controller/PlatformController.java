@@ -49,4 +49,11 @@ public class PlatformController {
         view.setViewName("redirect:/article/create");
         return view;
     }
+
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ModelAndView logout() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("redirect:/login");
+        return view;
+    }
 }
