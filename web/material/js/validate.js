@@ -18,7 +18,9 @@ function register_validate() {
     var password = $("#account_password").val();
     var verify_password = $("#confirm_account_password").val();
     if (not_null(email) && not_null(name) && not_null(password) && not_null(verify_password)) {
-        return true;
+        if (email_validate(email) && password == verify_password) {
+            return true;
+        }
     }
     return false;
 }
