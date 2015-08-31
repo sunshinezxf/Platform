@@ -2,6 +2,7 @@ package platform.sunshine.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
+import platform.sunshine.service.WriterService;
+import platform.sunshine.utils.ResultData;
 
 /**
  * Created by sunshine on 15/8/13.
@@ -16,6 +19,9 @@ import platform.sunshine.form.RegisterForm;
 @RestController
 public class PlatformController {
     private Logger logger = LoggerFactory.getLogger(PlatformController.class);
+
+    @Autowired
+    private WriterService writerService;
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public ModelAndView index() {
@@ -38,6 +44,8 @@ public class PlatformController {
             view.setViewName("register");
             return view;
         }
+        ResultData data = writerService.createWriter();
+        view.setViewName("redirect:/login");
         return view;
     }
 

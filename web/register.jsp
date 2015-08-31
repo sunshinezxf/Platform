@@ -56,6 +56,11 @@
                     $("#rbtn").attr("disabled", "disabled");
                 }
             });
+            $("#rbtn").click(function () {
+                $("#r-form").attr("action", "${path.concat('/register')}");
+                $("#r-form").attr("method", "post");
+                $("#r-form").submit();
+            })
         })
     </script>
 </head>
@@ -74,7 +79,7 @@
     </div>
 </nav>
 <div class="container">
-    <form class="form-register">
+    <form class="form-register" id="r-form">
         <h2 class="form-register-heading">
             注册
         </h2>

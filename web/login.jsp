@@ -46,7 +46,7 @@
         $("#lgbtn").click(function () {
             $("#lg-form").attr("action", "${path.concat('/login')}");
             $("#lg-form").attr("method", "post");
-            $("lg-form").submit();
+            $("#lg-form").submit();
         })
     });
 </script>
