@@ -1,5 +1,8 @@
 package platform.sunshine.model;
 
+import platform.sunshine.form.RegisterForm;
+import platform.sunshine.utils.Encryption;
+
 import java.sql.Timestamp;
 
 /**
@@ -14,6 +17,13 @@ public class Account {
 
     public Account() {
         createAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Account(RegisterForm form) {
+        this();
+        this.email = form.getEmail();
+        this.username = form.getUsername();
+        this.password = Encryption.desEncode(form.getPassword(), form.getEmail());
     }
 
     public String getAccountId() {

@@ -44,7 +44,7 @@ public class PlatformController {
             view.setViewName("register");
             return view;
         }
-        ResultData data = writerService.createWriter();
+        ResultData data = writerService.createWriter(registerForm);
         view.setViewName("redirect:/login");
         return view;
     }

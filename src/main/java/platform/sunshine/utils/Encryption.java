@@ -14,6 +14,7 @@ import java.security.SecureRandom;
  * Created by sunshine on 2015/8/14.
  */
 public class Encryption {
+
     public static String md5(String string) {
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
                 'a', 'b', 'c', 'd', 'e', 'f'};
@@ -36,19 +37,26 @@ public class Encryption {
         }
     }
 
-    public static String desEncode(String data, String key) throws Exception {
-        byte[] bt = encrypt(data.getBytes(), key.getBytes());
-        String strs = new BASE64Encoder().encode(bt);
-        return strs;
+    public static String desEncode(String data, String key) {
+        try {
+            byte[] bt = encrypt(data.getBytes(), key.getBytes());
+            return new BASE64Encoder().encode(bt);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public static String desDecode(String data, String key) throws Exception {
+    public static String desDecode(String data, String key) {
         if (data == null)
             return null;
-        BASE64Decoder decoder = new BASE64Decoder();
-        byte[] buf = decoder.decodeBuffer(data);
-        byte[] bt = decrypt(buf, key.getBytes());
-        return new String(bt);
+        try {
+            BASE64Decoder decoder = new BASE64Decoder();
+            byte[] buf = decoder.decodeBuffer(data);
+            byte[] bt = decrypt(buf, key.getBytes());
+            return new String(bt);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     private static byte[] decrypt(byte[] data, byte[] key) throws Exception {
