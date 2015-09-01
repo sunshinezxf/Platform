@@ -18,6 +18,7 @@ import platform.sunshine.utils.ResultData;
 public class WriterServiceImpl implements WriterService {
     private Logger logger = LoggerFactory.getLogger(WriterServiceImpl.class);
 
+    @Override
     public ResultData createWriter(RegisterForm form) {
         ResultData result = new ResultData();
         Account account = new Account(form);
@@ -26,6 +27,13 @@ public class WriterServiceImpl implements WriterService {
         logger.debug("account.username: " + account.getUsername());
         logger.debug("account.encoded_password: " + account.getPassword());
         logger.debug("account.decoded_password: " + Encryption.desDecode(account.getPassword(), account.getEmail()));
+        return result;
+    }
+
+    @Override
+    public ResultData queryByAccountId(String accountId) {
+        ResultData result = new ResultData();
+
         return result;
     }
 }
