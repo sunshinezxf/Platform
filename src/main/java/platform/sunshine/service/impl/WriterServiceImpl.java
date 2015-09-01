@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
+import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.Encryption;
+import platform.sunshine.utils.IDGenerator;
 import platform.sunshine.utils.ResultData;
 
 /**
@@ -19,6 +21,7 @@ public class WriterServiceImpl implements WriterService {
     public ResultData createWriter(RegisterForm form) {
         ResultData result = new ResultData();
         Account account = new Account(form);
+        String tempId = IDGenerator.generate(CommonValue.ID_LENGTH);
         logger.debug("account.email: " + account.getEmail());
         logger.debug("account.username: " + account.getUsername());
         logger.debug("account.encoded_password: " + account.getPassword());
