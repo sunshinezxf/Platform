@@ -6,4 +6,8 @@
     <bean id="articleDao" class="platform.sunshine.dao.impl.ArticleDaoImpl">
         <property name="sqlSession" ref="sqlSession"/>
     </bean>
+
+    <bean id="writerDao" class="platform.sunshine.dao.impl.WriterDaoImpl">
+        <property name="sqlSession" ref="sqlSession"/>
+    </bean>
 </beans>

@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import platform.sunshine.dao.WriterDao;
 import platform.sunshine.model.Account;
+import platform.sunshine.utils.BaseDao;
 import platform.sunshine.utils.Encryption;
 import platform.sunshine.utils.ResultData;
 
@@ -12,7 +13,7 @@ import platform.sunshine.utils.ResultData;
  * Created by sunshine on 15/8/29.
  */
 @Repository
-public class WriterDaoImpl implements WriterDao {
+public class WriterDaoImpl extends BaseDao implements WriterDao {
     private Logger logger = LoggerFactory.getLogger(WriterDaoImpl.class);
 
     @Override
@@ -22,6 +23,7 @@ public class WriterDaoImpl implements WriterDao {
         logger.debug("account.username: " + account.getUsername());
         logger.debug("account.encoded_password: " + account.getPassword());
         logger.debug("account.decoded_password: " + Encryption.desDecode(account.getPassword(), account.getEmail()));
+        sqlSession.insert("writer.insertAccount", account);
         return result;
     }
 }

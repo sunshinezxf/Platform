@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="writer">
 
+    <!-- 添加一条写手纪录 -->
+    <insert id="insertAccount" parameterType="platform.sunshine.model.Account" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO platform_account(platform_account_id, platform_account_username, platform_account_email, platform_account_password, platform_account_password, del_flag)
+        VALUES (#{accountId}, #{username}, #{email}, #{password}, #{createAt}, 0);
+    </insert>
 </mapper>

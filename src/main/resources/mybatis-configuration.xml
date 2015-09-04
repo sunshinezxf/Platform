@@ -4,6 +4,6 @@
 
 <configuration>
     <mappers>
-
+        <mapper resource="platform/sunshine/mapper/writer.xml"/>
     </mappers>
 </configuration>
