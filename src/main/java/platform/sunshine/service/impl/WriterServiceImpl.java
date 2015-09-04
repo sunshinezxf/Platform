@@ -35,11 +35,4 @@ public class WriterServiceImpl implements WriterService {
         writerDao.insertWriter(account);
         return result;
     }
-
-    @Override
-    public ResultData queryByAccountId(String accountId) {
-        ResultData result = new ResultData();
-        logger.debug("query whether the account id: " + accountId + " exist or not..");
-        return result;
-    }
 }

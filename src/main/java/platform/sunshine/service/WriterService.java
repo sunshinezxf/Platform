@@ -8,6 +8,4 @@ import platform.sunshine.utils.ResultData;
  */
 public interface WriterService {
     public ResultData createWriter(RegisterForm form);
-
-    public ResultData queryByAccountId(String accountId);
 }
