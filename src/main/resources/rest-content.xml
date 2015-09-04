@@ -54,4 +54,7 @@
     </bean>
 
     <task:annotation-driven/>
+    <import resource="rest-controllers.xml"/>
+    <import resource="rest-services.xml"/>
+    <import resource="rest-daos.xml"/>
 </beans>
