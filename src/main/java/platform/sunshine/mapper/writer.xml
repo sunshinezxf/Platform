@@ -1,10 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="writer">
+    <resultMap id="writerForClient" type="platform.sunshine.vo.AccountVo">
+        <result property="accountId" column="platform_account_id"/>
+        <result property="accountUsername" column="platform_account_username"/>
+        <result property="accountEmail" column="platform_account_email"/>
+    </resultMap>
+
+    <resultMap id="writerForServer" type="platform.sunshine.model.Account">
+        <result property="accountId" column="platform_account_id"/>
+        <result property="username" column="platform_account_username"/>
+        <result property="email" column="platform_account_email"/>
+        <result property="password" column="platform_account_password"/>
+        <result property="createAt" column="create_time"/>
+    </resultMap>
+
 
     <!-- 添加一条写手纪录 -->
     <insert id="insertAccount" parameterType="platform.sunshine.model.Account" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO platform_account(platform_account_id, platform_account_username, platform_account_email, platform_account_password, create_time, del_flag)
         VALUES (#{accountId}, #{username}, #{email}, #{password}, #{createAt}, 0);
     </insert>
+
+    <!-- 根据参数查询写手纪录供用户使用 -->
+    <select id="queryAccount" parameterType="platform.sunshine.model.Account" resultMap="writerForClient">
+        SELECT pa.platform_account_id, pa.platform_account_username, pa.platform_account_email
+        FROM platform_account pa
+        WHERE 1 = 1
+        <if test="accountId != null and accountId != ''">
+            AND pa.platform_account_id = #{accountId}
+        </if>
+        <if test="username != null and username != ''">
+            AND pa.platform_account_username = #{username}
+        </if>
+        <if test="email != null and email != ''">
+            AND pa.platform_account_email = #{email}
+        </if>
+    </select>
 </mapper>
