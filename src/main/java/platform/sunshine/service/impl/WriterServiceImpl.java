@@ -27,6 +27,10 @@ public class WriterServiceImpl implements WriterService {
         ResultData result = new ResultData();
         Account account = new Account(form);
         String tempId = IDGenerator.generate(CommonValue.ID_LENGTH);
+        while(true) {
+
+            break;
+        }
         account.setAccountId(tempId);
         writerDao.insertWriter(account);
         return result;

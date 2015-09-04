@@ -9,4 +9,6 @@ import platform.sunshine.utils.ResultData;
 public interface WriterDao {
 
     public ResultData insertWriter(Account account);
+
+    public ResultData queryWriter(Account account);
 }

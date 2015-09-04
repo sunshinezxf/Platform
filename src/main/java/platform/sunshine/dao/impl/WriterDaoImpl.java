@@ -6,8 +6,9 @@ import org.springframework.stereotype.Repository;
 import platform.sunshine.dao.WriterDao;
 import platform.sunshine.model.Account;
 import platform.sunshine.utils.BaseDao;
-import platform.sunshine.utils.Encryption;
+import platform.sunshine.utils.ResposeCode;
 import platform.sunshine.utils.ResultData;
+import platform.sunshine.vo.AccountVo;
 
 /**
  * Created by sunshine on 15/8/29.
@@ -19,11 +20,36 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
     @Override
     public ResultData insertWriter(Account account) {
         ResultData result = new ResultData();
-        logger.debug("account.email: " + account.getEmail());
-        logger.debug("account.username: " + account.getUsername());
-        logger.debug("account.encoded_password: " + account.getPassword());
-        logger.debug("account.decoded_password: " + Encryption.desDecode(account.getPassword(), account.getEmail()));
-        sqlSession.insert("writer.insertAccount", account);
-        return result;
+        try {
+            int row = sqlSession.insert("writer.insertAccount", account);
+            if (row > 0) {
+                result.setData(queryWriter(account).getData());
+            } else {
+                result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+        } finally {
+            return result;
+        }
+    }
+
+    @Override
+    public ResultData queryWriter(Account account) {
+        ResultData result = new ResultData();
+        try {
+            AccountVo vo = sqlSession.selectOne("queryAccount", account);
+            if (vo == null) {
+                result.setResposeCode(ResposeCode.RESPONSE_NULL);
+            } else {
+                result.setData(vo);
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+        } finally {
+            return result;
+        }
     }
 }
