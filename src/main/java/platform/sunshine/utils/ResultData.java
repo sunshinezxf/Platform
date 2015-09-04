@@ -4,20 +4,20 @@ package platform.sunshine.utils;
  * Created by sunshine on 15/7/27.
  */
 public class ResultData {
-    private ResposeCode resposeCode;
+    private ResponseCode responseCode;
     private Object data;
     private String description;
 
     public ResultData() {
-        resposeCode = ResposeCode.RESPONSE_OK;
+        responseCode = ResponseCode.RESPONSE_OK;
     }
 
-    public ResposeCode getResposeCode() {
-        return resposeCode;
+    public ResponseCode getResponseCode() {
+        return responseCode;
     }
 
-    public void setResposeCode(ResposeCode resposeCode) {
-        this.resposeCode = resposeCode;
+    public void setResponseCode(ResponseCode responseCode) {
+        this.responseCode = responseCode;
     }
 
     public Object getData() {

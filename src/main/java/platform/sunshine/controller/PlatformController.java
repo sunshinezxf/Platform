@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.service.WriterService;
+import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 
 /**
@@ -41,6 +42,11 @@ public class PlatformController {
     public ModelAndView register(RegisterForm registerForm, BindingResult result) {
         ModelAndView view = new ModelAndView();
         if (result.hasErrors()) {
+            view.setViewName("register");
+            return view;
+        }
+        ResultData emailExist = writerService.queryAccountByEmail(registerForm.getEmail());
+        if (emailExist.getResponseCode() == ResponseCode.RESPONSE_OK) {
             view.setViewName("register");
             return view;
         }

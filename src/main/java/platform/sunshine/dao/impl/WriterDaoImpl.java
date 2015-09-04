@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import platform.sunshine.dao.WriterDao;
 import platform.sunshine.model.Account;
 import platform.sunshine.utils.BaseDao;
-import platform.sunshine.utils.ResposeCode;
+import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 import platform.sunshine.vo.AccountVo;
 
@@ -25,11 +25,11 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
             if (row > 0) {
                 result.setData(queryWriter(account).getData());
             } else {
-                result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+                result.setResponseCode(ResponseCode.RESPONSE_ERROR);
             }
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
         } finally {
             return result;
         }
@@ -41,13 +41,14 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
         try {
             AccountVo vo = sqlSession.selectOne("queryAccount", account);
             if (vo == null) {
-                result.setResposeCode(ResposeCode.RESPONSE_NULL);
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
             } else {
                 result.setData(vo);
             }
         } catch (Exception e) {
             logger.debug(e.getMessage());
-            result.setResposeCode(ResposeCode.RESPONSE_ERROR);
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setData(e.getMessage());
         } finally {
             return result;
         }

@@ -7,7 +7,7 @@ import platform.sunshine.form.ArticleForm;
 import platform.sunshine.model.Article;
 import platform.sunshine.model.ArticlePaymentStatus;
 import platform.sunshine.utils.Encryption;
-import platform.sunshine.utils.ResposeCode;
+import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.vo.ArticleViewVO;
 
 import javax.servlet.http.HttpServletResponse;
@@ -35,7 +35,7 @@ public class ArticleController {
     public Map<String, Object> create(@Valid ArticleForm articleForm, BindingResult result) throws IOException {
         Map<String, Object> params = new HashMap<String, Object>();
         if (result.hasErrors()) {
-            params.put("status", ResposeCode.RESPONSE_ERROR);
+            params.put("status", ResponseCode.RESPONSE_ERROR);
             return params;
         }
         Article article = new Article(articleForm);
@@ -43,7 +43,7 @@ public class ArticleController {
         article.setArticleId(preparedArticleId);
         vo.setArticle(article);
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_NOT_PAYED);
-        params.put("status", ResposeCode.RESPONSE_OK);
+        params.put("status", ResponseCode.RESPONSE_OK);
         params.put("url", "/article/" + preparedArticleId);
         return params;
     }
