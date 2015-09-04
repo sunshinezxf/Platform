@@ -1,5 +1,6 @@
 package platform.sunshine.model;
 
+import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.utils.Encryption;
 
@@ -23,6 +24,12 @@ public class Account {
         this();
         this.email = form.getEmail();
         this.username = form.getUsername();
+        this.password = Encryption.desEncode(form.getPassword(), form.getEmail());
+    }
+
+    public Account(LoginForm form) {
+        this();
+        this.email = form.getEmail();
         this.password = Encryption.desEncode(form.getPassword(), form.getEmail());
     }
 

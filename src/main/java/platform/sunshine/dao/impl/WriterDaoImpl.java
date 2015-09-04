@@ -8,7 +8,6 @@ import platform.sunshine.model.Account;
 import platform.sunshine.utils.BaseDao;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
-import platform.sunshine.vo.AccountVo;
 
 /**
  * Created by sunshine on 15/8/29.
@@ -39,7 +38,7 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
     public ResultData queryWriter(Account account) {
         ResultData result = new ResultData();
         try {
-            AccountVo vo = sqlSession.selectOne("queryAccount", account);
+            Account vo = sqlSession.selectOne("queryAccount", account);
             if (vo == null) {
                 result.setResponseCode(ResponseCode.RESPONSE_NULL);
             } else {

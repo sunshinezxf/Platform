@@ -71,7 +71,12 @@ public class PlatformController {
         }
         String username = loginForm.getEmail();
         logger.debug("username: " + username);
-        view.setViewName("redirect:/article/create");
+        ResultData data = writerService.login(loginForm);
+        if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            view.setViewName("redirect:/article/create");
+        } else {
+            view.setViewName("login");
+        }
         return view;
     }
 

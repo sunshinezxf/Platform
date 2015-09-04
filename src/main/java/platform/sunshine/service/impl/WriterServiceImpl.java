@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import platform.sunshine.dao.WriterDao;
+import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
@@ -32,7 +33,6 @@ public class WriterServiceImpl implements WriterService {
         while (true) {
             Account params = new Account();
             params.setAccountId(tempId);
-
             response = writerDao.queryWriter(params).getResponseCode();
             if (response == ResponseCode.RESPONSE_NULL) {
                 account.setAccountId(tempId);
@@ -60,6 +60,7 @@ public class WriterServiceImpl implements WriterService {
         return result;
     }
 
+    @Override
     public ResultData queryAccountByEmail(String email) {
         ResultData result = new ResultData();
         Account params = new Account();
@@ -71,6 +72,28 @@ public class WriterServiceImpl implements WriterService {
             result.setResponseCode(ResponseCode.RESPONSE_NULL);
         } else {
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+        }
+        return result;
+    }
+
+    @Override
+    public ResultData login(LoginForm form) {
+        ResultData result = new ResultData();
+        Account account = new Account(form);
+        Account params = new Account();
+        params.setEmail(account.getEmail());
+        ResultData data = writerDao.queryWriter(params);
+        if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            Account vo = (Account) data.getData();
+            if (account.getPassword().equals(vo.getPassword())) {
+                result.setData(vo);
+            } else {
+                result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+                result.setDescription("用户名、密码错误");
+            }
+        } else {
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription("用户名、密码不存在");
         }
         return result;
     }

@@ -1,5 +1,6 @@
 package platform.sunshine.service;
 
+import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.utils.ResultData;
 
@@ -10,4 +11,6 @@ public interface WriterService {
     public ResultData createWriter(RegisterForm form);
 
     public ResultData queryAccountByEmail(String email);
+
+    public ResultData login(LoginForm form);
 }
