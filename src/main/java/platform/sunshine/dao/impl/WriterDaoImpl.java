@@ -29,6 +29,7 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
         } catch (Exception e) {
             logger.debug(e.getMessage());
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
         } finally {
             return result;
         }
@@ -47,7 +48,7 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
         } catch (Exception e) {
             logger.debug(e.getMessage());
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
-            result.setData(e.getMessage());
+            result.setDescription(e.getMessage());
         } finally {
             return result;
         }
