@@ -32,4 +32,11 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao {
             return result;
         }
     }
+
+    @Override
+    public ResultData queryArticle(Article article) {
+        ResultData result = new ResultData();
+
+        return result;
+    }
 }
