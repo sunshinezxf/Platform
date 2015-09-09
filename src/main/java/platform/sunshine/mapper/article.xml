@@ -8,7 +8,7 @@
         <result property="password" column="platform_account_password"/>
         <result property="createAt" column="create_time"/>
     </resultMap>
-    
+
     <resultMap id="articleVo" type="platform.sunshine.model.Article">
         <result property="articleId" column="platform_article_id"/>
         <result property="title" column="platform_article_title"/>
@@ -17,4 +17,14 @@
         <result property="content" column="platform_article_content"/>
         <result property="createAt" column="create_time"/>
     </resultMap>
+
+    <!-- 插入一条文章纪录 -->
+    <insert id="insertArticle" parameterType="platform.sunshine.model.Article" useGeneratedKeys="true" keyProperty="id">
+
+    </insert>
+
+    <!-- 根据参数查询文章 -->
+    <select id="queryArticle" parameterType="platform.sunshine.model.Article" resultMap="articleVo">
+
+    </select>
 </mapper>
