@@ -14,6 +14,7 @@ public class Article {
     private String guidance;
     private String content;
     private Timestamp createAt;
+    private Account account;
 
     public Article() {
         createAt = new Timestamp(System.currentTimeMillis());
@@ -77,5 +78,13 @@ public class Article {
 
     public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }
