@@ -9,6 +9,7 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import platform.sunshine.form.LoginForm;
 import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
@@ -18,10 +19,17 @@ import platform.sunshine.utils.ResultData;
 /**
  * Created by sunshine on 2015/8/14.
  */
+@Component(value = "shiroRealm")
 public class ShiroRealm extends AuthorizingRealm {
     @Autowired
     private WriterService writerService;
 
+    /**
+     * 登录验证
+     * @param authenticationToken
+     * @return
+     * @throws AuthenticationException
+     */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
@@ -43,9 +51,13 @@ public class ShiroRealm extends AuthorizingRealm {
         return null;
     }
 
+    /**
+     * 权限检查
+     * @param principalCollection
+     * @return
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        Account account = (Account) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         return info;
     }
