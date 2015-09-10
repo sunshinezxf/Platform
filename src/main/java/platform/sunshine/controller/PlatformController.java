@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import platform.sunshine.utils.ResultData;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created by sunshine on 15/8/13.
@@ -50,6 +52,10 @@ public class PlatformController {
     public ModelAndView register(RegisterForm registerForm, BindingResult result) {
         ModelAndView view = new ModelAndView();
         if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError item : errors) {
+                logger.debug(item.getCode() + item.getDefaultMessage());
+            }
             view.setViewName("register");
             return view;
         }
@@ -74,6 +80,10 @@ public class PlatformController {
     public ModelAndView login(LoginForm loginForm, BindingResult result, HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
         if (result.hasErrors()) {
+            List<ObjectError> errors = result.getAllErrors();
+            for (ObjectError item : errors) {
+                logger.debug(item.getCode() + item.getDefaultMessage());
+            }
             view.setViewName("login");
             return view;
         }
