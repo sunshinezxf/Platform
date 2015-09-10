@@ -15,6 +15,7 @@ import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
 import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
+import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 
@@ -86,7 +87,7 @@ public class PlatformController {
             }
             subject.login(new UsernamePasswordToken(loginForm.getEmail(), loginForm.getPassword()));
             Account current = (Account) writerService.queryAccountByEmail(loginForm.getEmail()).getData();
-            request.getSession().setAttribute("current", current);
+            request.getSession().setAttribute(CommonValue.LOGIN_USER, current);
         } catch (Exception e) {
             view.setViewName("login");
             return view;
@@ -98,7 +99,7 @@ public class PlatformController {
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout(HttpSession session) {
         ModelAndView view = new ModelAndView();
-        session.removeAttribute("current");
+        session.removeAttribute(CommonValue.LOGIN_USER);
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         view.setViewName("redirect:/login");

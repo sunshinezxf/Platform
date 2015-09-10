@@ -5,4 +5,6 @@ package platform.sunshine.utils;
  */
 public class CommonValue {
     public final static int ID_LENGTH = 8;
+
+    public final static String LOGIN_USER = "current";
 }
