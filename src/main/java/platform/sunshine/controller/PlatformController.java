@@ -19,6 +19,7 @@ import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by sunshine on 15/8/13.
@@ -95,8 +96,11 @@ public class PlatformController {
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public ModelAndView logout() {
+    public ModelAndView logout(HttpSession session) {
         ModelAndView view = new ModelAndView();
+        session.removeAttribute("current");
+        Subject subject = SecurityUtils.getSubject();
+        subject.logout();
         view.setViewName("redirect:/login");
         return view;
     }
