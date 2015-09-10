@@ -1,5 +1,8 @@
 package platform.sunshine.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.LoginForm;
 import platform.sunshine.form.RegisterForm;
+import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by sunshine on 15/8/13.
@@ -63,7 +69,7 @@ public class PlatformController {
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public ModelAndView login(LoginForm loginForm, BindingResult result) {
+    public ModelAndView login(LoginForm loginForm, BindingResult result, HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
         if (result.hasErrors()) {
             view.setViewName("login");
@@ -71,12 +77,20 @@ public class PlatformController {
         }
         String username = loginForm.getEmail();
         logger.debug("username: " + username);
-        ResultData data = writerService.login(loginForm);
-        if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
-            view.setViewName("redirect:/article/create");
-        } else {
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            if (subject.isAuthenticated()) {
+                view.setViewName("redirect:/article/create");
+                return view;
+            }
+            subject.login(new UsernamePasswordToken(loginForm.getEmail(), loginForm.getPassword()));
+            Account current = (Account) writerService.queryAccountByEmail(loginForm.getEmail()).getData();
+            request.getSession().setAttribute("current", current);
+        } catch (Exception e) {
             view.setViewName("login");
+            return view;
         }
+        view.setViewName("redirect:/article/create");
         return view;
     }
 
