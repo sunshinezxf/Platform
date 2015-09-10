@@ -11,6 +11,7 @@
         <property name="locations">
             <list>
                 <value>classpath:log4j.properties</value>
+                <value>classpath:configuration.properties</value>
             </list>
         </property>
     </bean>
@@ -19,9 +20,9 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost/platform"/>
-        <property name="username" value="root"/>
-        <property name="password" value=""/>
+        <property name="url" value="${jdbc_url}"/>
+        <property name="username" value="${mysql_username}"/>
+        <property name="password" value="${mysql_password}"/>
         <property name="maxActive" value="100"/>
         <property name="maxIdle" value="30"/>
         <property name="maxWait" value="500"/>
@@ -37,8 +38,7 @@
         <property name="configLocation" value="classpath:mybatis-configuration.xml"/>
         <property name="dataSource" ref="dataSource"/>
         <property name="transactionFactory">
-            <bean
-                    class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory"/>
+            <bean class="org.apache.ibatis.transaction.managed.ManagedTransactionFactory"/>
         </property>
     </bean>
 
@@ -51,6 +51,33 @@
           class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxInMemorySize" value="10240"/>
         <property name="maxUploadSize" value="50000000"/>
+    </bean>
+
+    <bean id="shiroEhcacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml"/>
+    </bean>
+
+    <bean id="shiroRealm" class="platform.sunshine.security.ShiroRealm">
+    </bean>
+
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm"/>
+        <property name="cacheManager" ref="shiroEhcacheManager"/>
+    </bean>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login"/>
+        <property name="unauthorizedUrl" value="/index"/>
+        <property name="filterChainDefinitions">
+            <value>
+                /material/** = anon
+                /index = anon
+                /login = anon
+                /register = anon
+                /** = authc
+            </value>
+        </property>
     </bean>
 
     <task:annotation-driven/>
