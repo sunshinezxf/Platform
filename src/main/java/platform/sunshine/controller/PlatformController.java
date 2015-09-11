@@ -65,7 +65,11 @@ public class PlatformController {
             return view;
         }
         ResultData data = writerService.createWriter(registerForm);
-        view.setViewName("redirect:/login");
+        if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            view.setViewName("redirect:/login");
+        } else {
+            view.setViewName("register");
+        }
         return view;
     }
 

@@ -1,13 +1,19 @@
 package platform.sunshine.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import platform.sunshine.form.ArticleForm;
+import platform.sunshine.model.Account;
 import platform.sunshine.model.Article;
 import platform.sunshine.model.ArticlePaymentStatus;
+import platform.sunshine.service.ArticleService;
+import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.Encryption;
 import platform.sunshine.utils.ResponseCode;
+import platform.sunshine.utils.ResultData;
 import platform.sunshine.vo.ArticleViewVO;
 
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +30,9 @@ import java.util.Map;
 public class ArticleController {
     private static ArticleViewVO vo = new ArticleViewVO();
 
+    @Autowired
+    private ArticleService articleService;
+
     @RequestMapping(method = RequestMethod.GET, value = "/create")
     public ModelAndView create() {
         ModelAndView view = new ModelAndView();
@@ -33,14 +42,16 @@ public class ArticleController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/create")
     public Map<String, Object> create(@Valid ArticleForm articleForm, BindingResult result) throws IOException {
+        Account account = (Account) SecurityUtils.getSubject().getSession().getAttribute(CommonValue.LOGIN_USER);
         Map<String, Object> params = new HashMap<String, Object>();
         if (result.hasErrors()) {
             params.put("status", ResponseCode.RESPONSE_ERROR);
             return params;
         }
-        Article article = new Article(articleForm);
+        Article article = new Article(articleForm, account);
         String preparedArticleId = Encryption.md5(article.getTitle() + article.getCreateAt());
         article.setArticleId(preparedArticleId);
+        articleService.createArticle(article);
         vo.setArticle(article);
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_NOT_PAYED);
         params.put("status", ResponseCode.RESPONSE_OK);
@@ -52,6 +63,12 @@ public class ArticleController {
     public ModelAndView view(@PathVariable String articleId) {
         ModelAndView view = new ModelAndView();
         view.setViewName("/article/distribute/view");
+        Article params = new Article();
+        params.setArticleId(articleId);
+        ResultData data = articleService.queryArticle(params);
+        if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
+            vo.setArticle((Article) data.getData());
+        }
         view.addObject("vo", vo);
         return view;
     }

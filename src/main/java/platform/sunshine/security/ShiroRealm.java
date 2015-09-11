@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import platform.sunshine.form.LoginForm;
 import platform.sunshine.model.Account;
 import platform.sunshine.service.WriterService;
+import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 
@@ -42,7 +43,7 @@ public class ShiroRealm extends AuthorizingRealm {
                 Subject subject = SecurityUtils.getSubject();
                 if (subject != null) {
                     Session session = subject.getSession();
-                    session.setAttribute("account", account);
+                    session.setAttribute(CommonValue.LOGIN_USER, account);
                 }
                 return new SimpleAuthenticationInfo(account, token.getPassword(), getName());
             }

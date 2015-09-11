@@ -16,15 +16,28 @@
         <result property="guidance" column="platform_article_guidance"/>
         <result property="content" column="platform_article_content"/>
         <result property="createAt" column="create_time"/>
+        <association property="account" column="platform_account_id" javaType="platform.sunshine.model.Account"
+                     resultMap="writerVo"/>
     </resultMap>
 
     <!-- 插入一条文章纪录 -->
     <insert id="insertArticle" parameterType="platform.sunshine.model.Article" useGeneratedKeys="true" keyProperty="id">
-
+        INSERT INTO platform_article(platform_article_id, platform_account_id, platform_article_title, platform_article_author, platform_article_guidance, platform_article_content, create_time, del_flag)
+        VALUES (#{articleId}, #{account.accountId}, #{title}, #{author}, #{guidance}, #{content}, #{createAt}, 0);
     </insert>
 
     <!-- 根据参数查询文章 -->
     <select id="queryArticle" parameterType="platform.sunshine.model.Article" resultMap="articleVo">
-
+        SELECT par.platform_article_id, par.platform_article_title, par.platform_article_author,
+        par.platform_article_guidance, par.platform_article_content, par.create_time,
+        pac.platform_account_id platform_account_id, pac.platform_account_username, pac.platform_account_email
+        FROM platform_article par, platform_account pac
+        WHERE 1 = 1
+        <if test="articleId != null and articleId != ''">
+            AND par.platform_article_id = #{articleId}
+        </if>
+        <if test="account != null and account.accountId != null and !account.accountId.isEmpty()">
+            AND par.platform_account_id = #{account.accountId}
+        </if>
     </select>
 </mapper>

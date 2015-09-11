@@ -2,6 +2,7 @@ package platform.sunshine.dao.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 import platform.sunshine.dao.ArticleDao;
 import platform.sunshine.model.Article;
 import platform.sunshine.utils.BaseDao;
@@ -14,16 +15,12 @@ import platform.sunshine.utils.ResultData;
 public class ArticleDaoImpl extends BaseDao implements ArticleDao {
     private Logger logger = LoggerFactory.getLogger(ArticleDaoImpl.class);
 
+    @Transactional
     @Override
     public ResultData insertArticle(Article article) {
         ResultData result = new ResultData();
         try {
-            int row = sqlSession.insert("insertArticle", article);
-            if (row > 0) {
-
-            } else {
-                result.setResponseCode(ResponseCode.RESPONSE_ERROR);
-            }
+            sqlSession.insert("article.insertArticle", article);
         } catch (Exception e) {
             logger.debug(e.getMessage());
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);
@@ -36,7 +33,19 @@ public class ArticleDaoImpl extends BaseDao implements ArticleDao {
     @Override
     public ResultData queryArticle(Article article) {
         ResultData result = new ResultData();
-
-        return result;
+        try {
+            Article vo = sqlSession.selectOne("article.queryArticle", article);
+            if (vo == null) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+            } else {
+                result.setData(vo);
+            }
+        } catch (Exception e) {
+            logger.debug(e.getMessage());
+            result.setResponseCode(ResponseCode.RESPONSE_ERROR);
+            result.setDescription(e.getMessage());
+        } finally {
+            return result;
+        }
     }
 }

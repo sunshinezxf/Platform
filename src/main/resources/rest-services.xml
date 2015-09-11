@@ -5,4 +5,6 @@
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <bean id="writerService" class="platform.sunshine.service.impl.WriterServiceImpl"/>
+
+    <bean id="articleService" class="platform.sunshine.service.impl.ArticleServiceImpl"/>
 </beans>

@@ -14,6 +14,7 @@ public class Article {
     private String guidance;
     private String content;
     private Timestamp createAt;
+    private Account account;
 
     public Article() {
         createAt = new Timestamp(System.currentTimeMillis());
@@ -31,6 +32,11 @@ public class Article {
         this(form.getTitle(), form.getAuthor(), form.getGuidance(), form.getContent());
     }
 
+    public Article(ArticleForm form, Account account) {
+        this(form);
+        this.account = account;
+    }
+
     public String getArticleId() {
         return articleId;
     }
@@ -38,6 +44,7 @@ public class Article {
     public void setArticleId(String articleId) {
         this.articleId = articleId;
     }
+
 
     public String getTitle() {
         return title;
@@ -77,5 +84,13 @@ public class Article {
 
     public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 }

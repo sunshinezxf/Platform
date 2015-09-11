@@ -20,12 +20,8 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
     public ResultData insertWriter(Account account) {
         ResultData result = new ResultData();
         try {
-            int row = sqlSession.insert("writer.insertAccount", account);
-            if (row > 0) {
-                result.setData(queryWriter(account).getData());
-            } else {
-                result.setResponseCode(ResponseCode.RESPONSE_ERROR);
-            }
+            sqlSession.insert("writer.insertAccount", account);
+            result.setData(queryWriter(account).getData());
         } catch (Exception e) {
             logger.debug(e.getMessage());
             result.setResponseCode(ResponseCode.RESPONSE_ERROR);

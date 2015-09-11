@@ -14,7 +14,7 @@
     <!-- 添加一条写手纪录 -->
     <insert id="insertAccount" parameterType="platform.sunshine.model.Account" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO platform_account(platform_account_id, platform_account_username, platform_account_email, platform_account_password, create_time, del_flag)
-        VALUES (#{accountId}, #{username}, #{email}, #{password}, #{createAt}, 0);
+        VALUES (#{accountId}, #{username}, #{email}, #{password}, #{createAt}, 0)
     </insert>
 
     <!-- 根据参数查询写手纪录供用户使用 -->
@@ -25,9 +25,6 @@
         WHERE 1 = 1
         <if test="accountId != null and accountId != ''">
             AND pa.platform_account_id = #{accountId}
-        </if>
-        <if test="username != null and username != ''">
-            AND pa.platform_account_username = #{username}
         </if>
         <if test="email != null and email != ''">
             AND pa.platform_account_email = #{email}
