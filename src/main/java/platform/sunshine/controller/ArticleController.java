@@ -44,19 +44,19 @@ public class ArticleController {
         vo.setArticle(article);
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_NOT_PAYED);
         params.put("status", ResponseCode.RESPONSE_OK);
-        params.put("url", "/article/" + preparedArticleId);
+        params.put("url", "/article/distribute/" + preparedArticleId);
         return params;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{articleId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/distribute/{articleId}")
     public ModelAndView view(@PathVariable String articleId) {
         ModelAndView view = new ModelAndView();
-        view.setViewName("/article/view");
+        view.setViewName("/article/distribute/view");
         view.addObject("vo", vo);
         return view;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/reward")
+    @RequestMapping(method = RequestMethod.POST, value = "/distribute/reward")
     @ResponseBody
     public void reward(HttpServletResponse response) throws IOException {
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_PAYED);
