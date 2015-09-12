@@ -73,6 +73,20 @@
             </ul>
         </div>
     </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <h1><i class="fa fa-home"></i> 首页 </h1>
+                <ol class="breadcrumb">
+                    <li><a href="${path.concat('/dashboard')}">首页</a></li>
+                    <li class="active">首页</li>
+                </ol>
+            </div>
+            <div class="col-md-12 col-lg-12">
+
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

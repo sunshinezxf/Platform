@@ -73,6 +73,18 @@
             </ul>
         </div>
     </div>
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+        <div class="row">
+            <div class="col-md-12 col-lg-12">
+                <h1><i class="fa fa-home"></i> 图文管理 </h1>
+                <ol class="breadcrumb">
+                    <li><a href="${path.concat('/dashboard')}">首页</a></li>
+                    <li><a data-toggle="collapse" data-parent="#accordion" href="#article-management">图文管理</a></li>
+                    <li class="active">图文统计</li>
+                </ol>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
