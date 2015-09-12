@@ -1,7 +1,7 @@
 body {
     padding-top: 40px;
     padding-bottom: 40px;
-    background-color: ghostwhite;
+    background-image: url('../image/bg.png');
 }
 
 .form-signin, .form-register {

@@ -96,7 +96,7 @@ public class PlatformController {
         try {
             Subject subject = SecurityUtils.getSubject();
             if (subject.isAuthenticated()) {
-                view.setViewName("redirect:/article/create");
+                view.setViewName("redirect:/dashboard");
                 return view;
             }
             subject.login(new UsernamePasswordToken(loginForm.getEmail(), loginForm.getPassword()));
@@ -106,7 +106,7 @@ public class PlatformController {
             view.setViewName("login");
             return view;
         }
-        view.setViewName("redirect:/article/create");
+        view.setViewName("redirect:/dashboard");
         return view;
     }
 
@@ -116,6 +116,23 @@ public class PlatformController {
         session.removeAttribute(CommonValue.LOGIN_USER);
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
+        view.setViewName("redirect:/login");
+        return view;
+    }
+
+    @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+    public ModelAndView dashboard() {
+        ModelAndView view = new ModelAndView();
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            if (subject.isAuthenticated()) {
+                view.setViewName("dashboard");
+                return view;
+            }
+        } catch (Exception e) {
+            view.setViewName("redirect:/login");
+            return view;
+        }
         view.setViewName("redirect:/login");
         return view;
     }
