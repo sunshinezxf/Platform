@@ -120,65 +120,108 @@
 </nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-            <div class="logo">
-                <img src="${path.concat('/material/image/logo.png')}"/>
+    <div class="body slide">
+        <aside class="sidebar show">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="platform-sidebar-logo">
+                        <h4 class="panel-title">
+                            <a>
+                                <i class="fa fa-desktop"></i>平台——文章
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="platform-sidebar-article">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#sidebar-article-manage"
+                               aria-expanded="false" aria-controls="sidebar-article-manage">
+                                <i class="fa fa-book"></i>
+                                图文管理
+                                <i class="pull-right fa fa-caret-down"></i>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="sidebar-article-manage" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="platform-sidebar-article" aria-expanded="false" style="height: 0px;">
+                        <div>
+                            <a class="list-group-item"><i class="fa fa-edit"></i> 创建图文</a>
+                            <a class="list-group-item"><i class="fa fa-tasks"></i> 图文统计</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="platform-sidebar-person">
+                        <h4 class="panel-title">
+                            <a>
+                                <i class="fa fa-user"></i>
+                                个人信息
+                            </a>
+                        </h4>
+                    </div>
+                </div>
             </div>
-            <ul class="nav nav-sidebar">
-                <li><a href="#">个人中心</a></li>
-                <li><a href="#">图文管理</a></li>
-                <li class="active"><a href="#">发表图文<span class="sr-only">(current)</span></a></li>
-                <li><a href="#">图文管理</a></li>
-            </ul>
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">素材管理</h1>
-            <section class="content">
-                <div id="first-step" style="display: block;">
-                    <div class="form-group">
-                        <label for="input-article-title">文章标题</label>
-                        <input type="text" class="form-control" id="input-article-title" placeholder="文章标题">
-                    </div>
-                    <div class="form-group">
-                        <label for="input-article-author">文章作者</label>
-                        <input type="text" class="form-control" id="input-article-author" placeholder="文章作者">
-                    </div>
-                    <div class="form-group">
-                        <label>文章导读</label>
-                        <br>
-
-                        <div class="btn-group btn-group-sm">
-                            <label class="radio-inline">
-                                <input id="guidance-radio-auto" name="guidance-radio" type="radio" arial-label="auto"
-                                       checked="checked"><label for="guidance-radio-auto">导读自动生成</label>
-                            </label>
-                            <label class="radio-inline">
-                                <input id="guidance-radio-hand" name="guidance-radio" type="radio"
-                                       arial-label="hand"><label
-                                    for="guidance-radio-hand">导读手动添加</label>
-                            </label>
-                        </div>
-                        <br>
-
-                        <div id="guidance-edit" style="display: none;">
-                            <div id="input-article-guidance" class="form-control"></div>
-                        </div>
-                    </div>
-                    <button class="btn btn-info" id="next-step">下一步 &gt;&gt;</button>
+        </aside>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <h1><i class="fa fa-home"></i> 图文管理 </h1>
+                    <ol class="breadcrumb">
+                        <li><a>首页</a></li>
+                        <li><a>图文管理</a></li>
+                        <li class="active">创建图文</li>
+                    </ol>
                 </div>
-                <div id="second-step" style="display: none;">
-                    <div class="form-group">
-                        <label>文章内容</label>
+                <div class="col-md-12 col-lg-12">
+                    <section class="content">
+                        <div id="first-step" style="display: block;">
+                            <div class="form-group">
+                                <label for="input-article-title">文章标题</label>
+                                <input type="text" class="form-control" id="input-article-title" placeholder="文章标题">
+                            </div>
+                            <div class="form-group">
+                                <label for="input-article-author">文章作者</label>
+                                <input type="text" class="form-control" id="input-article-author" placeholder="文章作者">
+                            </div>
+                            <div class="form-group">
+                                <label>文章导读</label>
+                                <br>
 
-                        <div id="input-article-content" class="form-control"></div>
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-info" id="previous-step">&lt;&lt; 上一步</button>
-                        <button class="btn btn-success" id="submit">保存图文</button>
-                    </div>
+                                <div class="btn-group btn-group-sm">
+                                    <label class="radio-inline">
+                                        <input id="guidance-radio-auto" name="guidance-radio" type="radio"
+                                               arial-label="auto"
+                                               checked="checked"><label for="guidance-radio-auto">导读自动生成</label>
+                                    </label>
+                                    <label class="radio-inline">
+                                        <input id="guidance-radio-hand" name="guidance-radio" type="radio"
+                                               arial-label="hand"><label
+                                            for="guidance-radio-hand">导读手动添加</label>
+                                    </label>
+                                </div>
+                                <br>
+
+                                <div id="guidance-edit" style="display: none;">
+                                    <div id="input-article-guidance" class="form-control"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-info" id="next-step">下一步 &gt;&gt;</button>
+                        </div>
+                        <div id="second-step" style="display: none;">
+                            <div class="form-group">
+                                <label>文章内容</label>
+
+                                <div id="input-article-content" class="form-control"></div>
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-info" id="previous-step">&lt;&lt; 上一步</button>
+                                <button class="btn btn-success" id="submit">保存图文</button>
+                            </div>
+                        </div>
+                    </section>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
 </div>
