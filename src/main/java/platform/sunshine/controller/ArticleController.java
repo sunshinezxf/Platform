@@ -1,6 +1,7 @@
 package platform.sunshine.controller;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +58,23 @@ public class ArticleController {
         params.put("status", ResponseCode.RESPONSE_OK);
         params.put("url", "/article/distribute/" + preparedArticleId);
         return params;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "manage")
+    public ModelAndView statistic() {
+        ModelAndView view = new ModelAndView();
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            if (subject.isAuthenticated()) {
+                view.setViewName("/article/manage");
+                return view;
+            }
+        } catch (Exception e) {
+            view.setViewName("redirect:/login");
+            return view;
+        }
+        view.setViewName("redirect:/login");
+        return view;
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "/distribute/{articleId}")

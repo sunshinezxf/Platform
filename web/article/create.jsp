@@ -34,11 +34,11 @@
             src="${path.concat('/material/plugins/summernote-master/dist/summernote.js')}"></script>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/summernote-master/lang/summernote-zh-CN.js')}"></script>
+    <script type="text/javascript" src="${path.concat('/material/js/dashboard.js')}"></script>
     <title>创建图文</title>
     <script>
         $(function () {
             $("#article-management").collapse('show');
-            $(".sub-nav").attr("style", "padding-left: 35px;");
         });
         $(document).ready(function () {
             $("#input-article-guidance").summernote({
@@ -131,11 +131,12 @@
                 <li class="active"><a data-toggle="collapse" data-parent="#accordion" href="#article-management"><i
                         class="fa fa-book"></i> 图文管理<i
                         class="pull-right fa fa-caret-down"></i></a>
-                    <ul id="article-management" class="nav nav-collapse collapse">
+                    <ul id="article-management" class="nav nav-collapse collapse in">
                         <li><a class="sub-nav" href="${path.concat('/article/create')}"><i class="fa fa-edit"></i>
                             创建图文<span class="sr-only">(current)</span></a>
                         </li>
-                        <li><a class="sub-nav"><i class="fa fa-tasks"></i> 图文统计</a></li>
+                        <li><a class="sub-nav" href="${path.concat('/article/manage')}"><i class="fa fa-tasks"></i> 图文统计</a>
+                        </li>
                     </ul>
                 </li>
                 <li><a><i class="fa fa-user"></i> 个人信息</a></li>
