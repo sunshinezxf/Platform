@@ -132,7 +132,8 @@
                         class="fa fa-book"></i> 图文管理<i
                         class="pull-right fa fa-caret-down"></i></a>
                     <ul id="article-management" class="nav nav-collapse collapse">
-                        <li><a class="sub-nav"><i class="fa fa-edit"></i> 创建图文<span class="sr-only">(current)</span></a>
+                        <li><a class="sub-nav" href="${path.concat('/article/create')}"><i class="fa fa-edit"></i>
+                            创建图文<span class="sr-only">(current)</span></a>
                         </li>
                         <li><a class="sub-nav"><i class="fa fa-tasks"></i> 图文统计</a></li>
                     </ul>
