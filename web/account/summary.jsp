@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: sunshine
-  Date: 15/9/12
-  Time: 18:46
+  Date: 15/9/13
+  Time: 13:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -29,12 +29,10 @@
     <script type="text/javascript"
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
     <script type="text/javascript" src="${path.concat('/material/js/dashboard.js')}"></script>
-    <title>首页</title>
+    <title>信息概述</title>
     <script>
-        $(function () {
-            $("#article-management").collapse('hide');
-            $("#account-management").collapse('hide');
-        });
+        $("#article-management").collapse('hide');
+        $("#account-management").collapse('show');
     </script>
 </head>
 <body>
@@ -57,8 +55,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <ul class="nav nav-sidebar" id="accordion" aria-multiselectable="true">
-                <li class="active"><a href="${path.concat('/dashboard')}"><i class="fa fa-desktop"></i> 首页<span
-                        class="sr-only">(current)</span></a></li>
+                <li><a href="${path.concat('/dashboard')}"><i class="fa fa-desktop"></i> 首页</a></li>
                 <li><a data-toggle="collapse" data-parent="#accordion" href="#article-management"><i
                         class="fa fa-book"></i> 图文管理<i
                         class="pull-right fa fa-caret-down"></i></a>
@@ -70,29 +67,16 @@
                         </li>
                     </ul>
                 </li>
-                <li><a data-toggle="collapse" data-parent="#accordion" href="#account-management"><i
+                <li class="active"><a data-toggle="collapse" data-parent="#accordion" href="#account-management"><i
                         class="fa fa-user"></i> 个人信息<i
                         class="pull-right fa fa-caret-down"></i></a>
-                    <ul id="account-management" class="nav nav-collapse collapse">
+                    <ul id="account-management" class="nav nav-collapse collapse in">
                         <li><a class="sub-nav" href="${path.concat('/account/summary')}"><i
-                                class="fa fa-credit-card"></i> 信息概述</a></li>
+                                class="fa fa-credit-card"></i> 信息概述<span
+                                class="sr-only">(current)</span></a></li>
                     </ul>
                 </li>
             </ul>
-        </div>
-    </div>
-    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-        <div class="row">
-            <div class="col-md-12 col-lg-12">
-                <h1><i class="fa fa-home"></i> 首页 </h1>
-                <ol class="breadcrumb">
-                    <li><a href="${path.concat('/dashboard')}">首页</a></li>
-                    <li class="active">首页</li>
-                </ol>
-            </div>
-            <div class="col-md-12 col-lg-12">
-
-            </div>
         </div>
     </div>
 </div>

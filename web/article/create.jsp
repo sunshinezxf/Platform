@@ -39,6 +39,7 @@
     <script>
         $(function () {
             $("#article-management").collapse('show');
+            $("#account-management").collapse('hide');
         });
         $(document).ready(function () {
             $("#input-article-guidance").summernote({
@@ -139,7 +140,14 @@
                         </li>
                     </ul>
                 </li>
-                <li><a><i class="fa fa-user"></i> 个人信息</a></li>
+                <li><a data-toggle="collapse" data-parent="#accordion" href="#account-management"><i
+                        class="fa fa-user"></i> 个人信息<i
+                        class="pull-right fa fa-caret-down"></i></a>
+                    <ul id="account-management" class="nav nav-collapse collapse">
+                        <li><a class="sub-nav" href="${path.concat('/account/summary')}"><i
+                                class="fa fa-credit-card"></i> 信息概述</a></li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
