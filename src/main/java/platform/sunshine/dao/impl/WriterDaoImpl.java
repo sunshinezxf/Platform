@@ -3,6 +3,7 @@ package platform.sunshine.dao.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import platform.sunshine.dao.WriterDao;
 import platform.sunshine.model.Account;
 import platform.sunshine.utils.BaseDao;
@@ -16,6 +17,7 @@ import platform.sunshine.utils.ResultData;
 public class WriterDaoImpl extends BaseDao implements WriterDao {
     private Logger logger = LoggerFactory.getLogger(WriterDaoImpl.class);
 
+    @Transactional
     @Override
     public ResultData insertWriter(Account account) {
         ResultData result = new ResultData();
@@ -35,7 +37,7 @@ public class WriterDaoImpl extends BaseDao implements WriterDao {
     public ResultData queryWriter(Account account) {
         ResultData result = new ResultData();
         try {
-            Account vo = sqlSession.selectOne("queryAccount", account);
+            Account vo = sqlSession.selectOne("writer.queryAccount", account);
             if (vo == null) {
                 result.setResponseCode(ResponseCode.RESPONSE_NULL);
             } else {

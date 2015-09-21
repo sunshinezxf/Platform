@@ -11,4 +11,14 @@
         INSERT INTO platform_reader(platform_reader_wechat, create_time, del_flag)
         VALUES (#{readerWechat}, #{createAt}, 0);
     </insert>
+
+    <!-- 根据条件查询是否已经存在读者纪录 -->
+    <select id="queryReader" parameterType="platform.sunshine.model.Reader" resultMap="readerVo">
+        SELECT platform_reader_wechat, create_time
+        FROM platform_reader
+        WHERE 1 = 1
+        <if test="readerWechat != null and readerWechat != ''">
+            AND platform_reader_wechat = #{readerWechat}
+        </if>
+    </select>
 </mapper>
