@@ -7,8 +7,11 @@ import java.sql.Timestamp;
  */
 public class Reader {
     private String readerWechat;
-
     private Timestamp createAt;
+
+    public Reader() {
+        this.createAt = new Timestamp(System.currentTimeMillis());
+    }
 
     public String getReaderWechat() {
         return readerWechat;

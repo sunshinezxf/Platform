@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reader">
+    <resultMap id="readerVo" type="platform.sunshine.model.Reader">
+        <result property="readerWechat" column="platform_reader_wechat"></result>
+        <result property="createAt" column="create_time"></result>
+    </resultMap>
+
+    <!-- 添加一条读者的信息 -->
+    <insert id="insertReader" parameterType="platform.sunshine.model.Reader" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO platform_reader(platform_reader_wechat, create_time, del_flag)
+        VALUES (#{readerWechat}, #{createAt}, 0);
+    </insert>
+</mapper>
