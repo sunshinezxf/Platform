@@ -3,6 +3,7 @@ package platform.sunshine.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import platform.sunshine.dao.ReaderDao;
 import platform.sunshine.model.Reader;
 import platform.sunshine.service.ReaderService;
@@ -12,6 +13,7 @@ import platform.sunshine.utils.ResultData;
 /**
  * Created by sunshine on 15/9/21.
  */
+@Service
 public class ReaderServiceImpl implements ReaderService {
     private Logger logger = LoggerFactory.getLogger(ReaderServiceImpl.class);
     @Autowired

@@ -13,6 +13,10 @@ public class Deal {
     private boolean dealStatus;
     private Timestamp createAt;
 
+    public Deal() {
+        this.createAt = new Timestamp(System.currentTimeMillis());
+    }
+
     public String getDealId() {
         return dealId;
     }
