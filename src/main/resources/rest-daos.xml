@@ -11,4 +11,12 @@
     <bean id="writerDao" class="platform.sunshine.dao.impl.WriterDaoImpl">
         <property name="sqlSession" ref="sqlSession"/>
     </bean>
+
+    <bean id="readerDao" class="platform.sunshine.dao.impl.ReaderDaoImpl">
+        <property name="sqlSession" ref="sqlSession"/>
+    </bean>
+
+    <bean id="dealDao" class="platform.sunshine.dao.impl.DealDaoImpl">
+        <property name="sqlSession" ref="sqlSession"/>
+    </bean>
 </beans>

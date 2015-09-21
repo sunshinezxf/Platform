@@ -33,6 +33,7 @@
         pac.platform_account_id platform_account_id, pac.platform_account_username, pac.platform_account_email
         FROM platform_article par, platform_account pac
         WHERE 1 = 1
+        AND par.platform_account_id = pac.platform_account_id
         <if test="articleId != null and articleId != ''">
             AND par.platform_article_id = #{articleId}
         </if>

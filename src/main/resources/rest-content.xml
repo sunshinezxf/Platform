@@ -71,7 +71,7 @@
         <property name="unauthorizedUrl" value="/index"/>
         <property name="filterChainDefinitions">
             <value>
-                /article/distribute/** = anon
+                /distribute/** = anon
                 /material/** = anon
                 /index = anon
                 /login = anon

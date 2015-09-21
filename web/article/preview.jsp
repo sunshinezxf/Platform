@@ -75,7 +75,7 @@
                 </div>
                 <c:if test="${vo.paymentStatus ne paymentstatus}">
                     <div class="btn-group" style="width: 100%;">
-                        <button class="alert alert-success" style="width: 100%;" id="reward">打赏继续阅读 &gt;&gt;</button>
+                        <button class="alert alert-success" style="width: 100%;" id="reward">点击查看全文 &gt;&gt;</button>
                     </div>
                 </c:if>
             </div>

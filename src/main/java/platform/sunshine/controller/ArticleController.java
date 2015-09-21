@@ -79,10 +79,12 @@ public class ArticleController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/{articleId}")
     public ModelAndView view(@PathVariable String articleId) {
+        Account account = (Account) SecurityUtils.getSubject().getSession().getAttribute(CommonValue.LOGIN_USER);
         ModelAndView view = new ModelAndView();
         view.setViewName("/article/preview");
         Article params = new Article();
         params.setArticleId(articleId);
+        params.setAccount(account);
         ResultData data = articleService.queryArticle(params);
         if (data.getResponseCode() == ResponseCode.RESPONSE_OK) {
             vo.setArticle((Article) data.getData());

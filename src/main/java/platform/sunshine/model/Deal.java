@@ -1,5 +1,7 @@
 package platform.sunshine.model;
 
+import platform.sunshine.utils.Encryption;
+
 import java.sql.Timestamp;
 
 /**
@@ -14,7 +16,16 @@ public class Deal {
     private Timestamp createAt;
 
     public Deal() {
+        reader = new Reader();
+        article = new Article();
         this.createAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Deal(String readerWechat, String articleId) {
+        this();
+        this.reader.setReaderWechat(readerWechat);
+        this.article.setArticleId(articleId);
+        this.dealId = Encryption.md5(readerWechat + articleId + createAt);
     }
 
     public String getDealId() {

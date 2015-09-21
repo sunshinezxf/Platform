@@ -7,5 +7,4 @@ public class IDGenerator {
     public static String generate(int length) {
         return Random.code(length);
     }
-
 }

@@ -52,6 +52,9 @@
         pac.platform_account_username, pac.platform_account_email
         FROM platform_deal pd, platform_reader pr, platform_article par, platform_account pac
         WHERE 1 = 1
+        AND pd.platform_reader_wechat = pr.platform_reader_wechat
+        AND pd.platform_article_id = par.platform_article_id
+        AND par.platform_account_id = pac.platform_account_id
         <if test="reader != null and reader.readerWechat != null and !reader.readerWechat.isEmpty()">
             AND pr.platform_reader_wechat = #{reader.readerWechat}
         </if>

@@ -7,4 +7,8 @@
     <bean id="writerService" class="platform.sunshine.service.impl.WriterServiceImpl"/>
 
     <bean id="articleService" class="platform.sunshine.service.impl.ArticleServiceImpl"/>
+
+    <bean id="readerService" class="platform.sunshine.service.impl.ReaderServiceImpl"/>
+
+    <bean id="dealService" class="platform.sunshine.service.impl.DealServiceImpl"/>
 </beans>

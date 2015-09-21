@@ -17,6 +17,7 @@ public class Article {
     private Account account;
 
     public Article() {
+        account = new Account();
         createAt = new Timestamp(System.currentTimeMillis());
     }
 
