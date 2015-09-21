@@ -42,7 +42,7 @@
             }
         });
         $("#reward").click(function () {
-            var url = "${path.concat('/article/distribute/reward')}";
+            var url = "${path.concat('/article/detail')}";
             $.post(url, function (result) {
                 if (result == "success") {
                     location.reload();

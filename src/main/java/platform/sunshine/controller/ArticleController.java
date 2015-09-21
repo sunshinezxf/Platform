@@ -56,7 +56,7 @@ public class ArticleController {
         vo.setArticle(article);
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_NOT_PAYED);
         params.put("status", ResponseCode.RESPONSE_OK);
-        params.put("url", "/article/distribute/" + preparedArticleId);
+        params.put("url", "/article/" + preparedArticleId);
         return params;
     }
 
@@ -77,10 +77,10 @@ public class ArticleController {
         return view;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/distribute/{articleId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{articleId}")
     public ModelAndView view(@PathVariable String articleId) {
         ModelAndView view = new ModelAndView();
-        view.setViewName("/article/distribute/view");
+        view.setViewName("/article/preview");
         Article params = new Article();
         params.setArticleId(articleId);
         ResultData data = articleService.queryArticle(params);
@@ -91,7 +91,7 @@ public class ArticleController {
         return view;
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/distribute/reward")
+    @RequestMapping(method = RequestMethod.POST, value = "/detail")
     @ResponseBody
     public void reward(HttpServletResponse response) throws IOException {
         vo.setPaymentStatus(ArticlePaymentStatus.ARTICLE_PAYED);

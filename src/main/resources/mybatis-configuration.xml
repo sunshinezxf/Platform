@@ -6,5 +6,7 @@
     <mappers>
         <mapper resource="platform/sunshine/mapper/writer.xml"/>
         <mapper resource="platform/sunshine/mapper/article.xml"/>
+        <mapper resource="platform/sunshine/mapper/reader.xml"/>
+        <mapper resource="platform/sunshine/mapper/deal.xml"/>
     </mappers>
 </configuration>

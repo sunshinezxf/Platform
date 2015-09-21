@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="deal">
+    <resultMap id="readerVo" type="platform.sunshine.model.Reader">
+        <result property="readerWechat" column="platform_reader_wechat"></result>
+        <result property="createAt" column="create_time"></result>
+    </resultMap>
+
+    <resultMap id="writerVo" type="platform.sunshine.model.Account">
+        <result property="accountId" column="platform_account_id"/>
+        <result property="username" column="platform_account_username"/>
+        <result property="email" column="platform_account_email"/>
+        <result property="password" column="platform_account_password"/>
+        <result property="createAt" column="create_time"/>
+    </resultMap>
+
+    <resultMap id="articleVo" type="platform.sunshine.model.Article">
+        <result property="articleId" column="platform_article_id"/>
+        <result property="title" column="platform_article_title"/>
+        <result property="author" column="platform_article_author"/>
+        <result property="guidance" column="platform_article_guidance"/>
+        <result property="content" column="platform_article_content"/>
+        <result property="createAt" column="create_time"/>
+        <association property="account" javaType="platform.sunshine.model.Account"
+                     resultMap="writerVo"/>
+    </resultMap>
+
+    <resultMap id="dealVo" type="platform.sunshine.model.Deal">
+        <result property="dealId" column="platform_deal_id"/>
+        <result property="dealPayment" column="platform_deal_payment"/>
+        <result property="dealStatus" column="platform_deal_status"/>
+        <result property="createAt" column="create_time"/>
+        <association property="reader" column="platform_reader_wechat" javaType="platform.sunshine.model.Reader"
+                     resultMap="readerVo"/>
+        <association property="article" column="platform_article_id" javaType="platform.sunshine.model.Article"
+                     resultMap="articleVo"/>
+    </resultMap>
+
+    <!-- 插入一条打赏纪录 -->
+    <insert id="insertDeal" parameterType="platform.sunshine.model.Deal" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO platform_deal(platform_deal_id, platform_reader_wechat, platform_article_id, platform_deal_payment,
+        platform_deal_status, create_time, del_flag)
+        VALUES (#{dealId}, #{reader.readerWechat}, #{article.articleId}, #{dealPayment}, #{dealStatus}, #{createAt}, 0)
+    </insert>
+
+    <!-- 根据条件查询纪录 -->
+    <select id="queryDeal" parameterType="platform.sunshine.model.Deal" resultMap="dealVo">
+        SELECT pd.platform_deal_id, pd.platform_deal_payment, pd.platform_deal_status, pd.create_time,
+        pr.platform_reader_wechat platform_reader_wechat, par.platform_article_id platform_article_id,
+        par.platform_article_title, par.platform_article_author, par.platform_article_guidance,
+        par.platform_article_content, par.create_time, pac.platform_account_id platform_account_id,
+        pac.platform_account_username, pac.platform_account_email
+        FROM platform_deal pd, platform_reader pr, platform_article par, platform_account pac
+        WHERE 1 = 1
+        <if test="reader != null and reader.readerWechat != null and !reader.readerWechat.isEmpty()">
+            AND pr.platform_reader_wechat = #{reader.readerWechat}
+        </if>
+        <if test="article != null and article.articleId != null and !article.articleId.isEmpty()">
+            AND par.platform_article_id = #{article.articleId}
+        </if>
+    </select>
+</mapper>
