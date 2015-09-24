@@ -29,6 +29,21 @@
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
     <title>平台——文章</title>
 </head>
+<script type="text/javascript">
+    (function () {
+        WgateJs = {};
+        WgateJs.auto_auth = true;
+        WgateJs.gate_options = {force: 1};
+        var u = (("https:" == document.location.protocol) ? "https" : "http") + "://st.weixingate.com/";
+        u = u + 'st/1531';
+        var d = document, g = d.createElement('script'), s = d.getElementsByTagName('script')[0];
+        g.type = 'text/javascript';
+        g.defer = true;
+        g.async = true;
+        g.src = u;
+        s.parentNode.insertBefore(g, s);
+    })();
+</script>
 <script>
     $(document).ready(function () {
         var flag = true;
@@ -44,7 +59,8 @@
         $("#reward").click(function () {
             var articleId = "${vo.article.articleId}";
             var url = "${path.concat('/distribute/reward')}";
-            $.post(url, {articleId: articleId}, function (result) {
+            var wgateid = WgateJs.getWgateid();
+            $.post(url, {articleId: articleId, wgateid: wgateid}, function (result) {
                 if (result == "success") {
                     location.reload();
                 }
