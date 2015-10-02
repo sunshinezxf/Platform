@@ -1,5 +1,6 @@
 package platform.sunshine.model;
 
+import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.Encryption;
 
 import java.sql.Timestamp;
@@ -9,15 +10,21 @@ import java.sql.Timestamp;
  */
 public class Deal {
     private String dealId;
+    private String subject;
     private Reader reader;
     private Article article;
     private double dealPayment;
+    private String currency;
+    private String channel;
     private boolean dealStatus;
     private Timestamp createAt;
+    private String clientIp;
 
     public Deal() {
+        subject = CommonValue.DEAL_SUBJECT;
         reader = new Reader();
         article = new Article();
+        currency = CommonValue.DEAL_CURRENCY;
         this.createAt = new Timestamp(System.currentTimeMillis());
     }
 
@@ -34,6 +41,14 @@ public class Deal {
 
     public void setDealId(String dealId) {
         this.dealId = dealId;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
     }
 
     public Reader getReader() {
@@ -60,6 +75,22 @@ public class Deal {
         this.dealPayment = dealPayment;
     }
 
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
     public boolean isDealStatus() {
         return dealStatus;
     }
@@ -74,5 +105,13 @@ public class Deal {
 
     public void setCreateAt(Timestamp createAt) {
         this.createAt = createAt;
+    }
+
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
     }
 }

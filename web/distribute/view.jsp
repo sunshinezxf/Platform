@@ -27,8 +27,64 @@
             src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
+    <script type="text/javascript" src="${path.concat('/material/plugins/pingpp-html5-one/pingpp_one.js')}"></script>
+    <script type="text/javascript" src="${path.concat('/material/plugins/wechat/jwexin-1.0.0.js')}"></script>
     <title>平台——文章</title>
 </head>
+<script type="text/javascript">
+
+    wx.config({
+        debug: false,
+        appId: 'wx7ba6d2f313ff5d53',
+        timestamp: '${configuration.timestamp}',
+        nonceStr: '${configuration.nonceStr}',
+        signature: '${configuration.signature}',
+        jsApiList: [
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage'
+        ]
+    });
+
+    // 2. 分享接口
+    // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+    wx.ready(function () {
+
+        wx.onMenuShareAppMessage({
+            title: '${vo.article.title}', // 分享标题
+            desc: '${vo.article.author}', // 分享描述
+            link: '${configuration.shareLink}', // 分享链接
+            imgUrl: '', // 分享图标
+            type: '', // 分享类型,music、video或link，不填默认为link
+            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+            success: function () {
+
+            },
+            cancel: function () {
+
+            }
+        });
+
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: '${vo.article.title}',
+            link: '${configuration.shareLink}',
+            imgUrl: '',
+            trigger: function (res) {
+//                // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+//                alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+
+            },
+            cancel: function (res) {
+
+            },
+            fail: function (res) {
+
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
     (function () {
         WgateJs = {};
@@ -67,6 +123,41 @@
             });
         });
     });
+</script>
+<script>
+    var articleId = "${vo.article.articleId}";
+    var url = "${path.concat('/distribute/reward')}";
+    var wgateid = WgateJs.getWgateid();
+    //    document.getElementById('reward').addEventListener('click', function () {
+    //        pingpp_one.init({
+    //            app_id: 'app_0erj5GTC0yjHKCGK',                     //该应用在ping++的应用ID
+    //            order_no: 'no1234567890',                     //订单在商户系统中的订单号
+    //            amount: 10,                                   //订单价格，单位：人民币 分
+    //            // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+    //            // upmp_wap 渠道在微信内部无法使用，若用户未安装银联手机支付控件，则无法调起支付
+    //            channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
+    //            charge_url: url,  //商户服务端创建订单的url
+    //            charge_param: {articleId: articleId, wgateid: wgateid},                      //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+    //            open_id: 'Openid'                             //(可选，使用微信公众号支付时必须传入)
+    //        }, function (res) {
+    //            if (!res.status) {
+    //                //处理错误
+    //                alert(res.msg);
+    //            }
+    //            else {
+    //                //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，调用 pingpp_one.success 方法，你也可以自己定义回调函数
+    //                //其他渠道的处理方法请见第 2 节
+    //                pingpp_one.success(function (res) {
+    //                    if (!res.status) {
+    //                        alert(res.msg);
+    //                    }
+    //                }, function () {
+    //                    //这里处理支付成功页面点击“继续购物”按钮触发的方法，例如：若你需要点击“继续购物”按钮跳转到你的购买页，则在该方法内写入 window.location.href = "你的购买页面 url"
+    //                    window.location.reload();
+    //                });
+    //            }
+    //        });
+    //    });
 </script>
 <body>
 <div class="container">

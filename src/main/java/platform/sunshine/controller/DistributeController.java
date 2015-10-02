@@ -6,20 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import platform.sunshine.model.Article;
-import platform.sunshine.model.ArticlePaymentStatus;
-import platform.sunshine.model.Deal;
-import platform.sunshine.model.Reader;
+import platform.sunshine.model.*;
 import platform.sunshine.service.ArticleService;
 import platform.sunshine.service.DealService;
 import platform.sunshine.service.ReaderService;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
+import platform.sunshine.utils.WechatConfig;
 import platform.sunshine.vo.ArticleViewVO;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
 
 /**
  * Created by sunshine on 15/8/28.
@@ -39,7 +38,10 @@ public class DistributeController {
     @RequestMapping(method = RequestMethod.GET, value = "/{articleId}")
     public ModelAndView distribute(@PathVariable String articleId, HttpServletRequest request) {
         ModelAndView view = new ModelAndView();
+        String wxopenid = request.getParameter("wxopenid");
         String wechat = request.getParameter("wgateid");
+        String verify = request.getParameter("verify");
+        String articleURL = "";
         logger.debug("wechat: " + wechat);
         if (!StringUtils.isEmpty(wechat)) {
             Reader reader = new Reader();
@@ -71,6 +73,18 @@ public class DistributeController {
         }
         view.setViewName("/distribute/view");
         view.addObject("vo", vo);
+
+        if (!StringUtils.isEmpty(wechat)) {
+            String url = "http://www.njuat.com/distribute/" + articleId + "?wxopenid=" + wxopenid + "&wgateid=" + wechat + "&verify=" + verify;
+            Configuration configuration = WechatConfig.config(url);
+            try {
+                String shareURL = "http://www.weixingate.com/gate.php?back=" + URLEncoder.encode("http://www.njuat.com/distribute/" + articleId, "utf-8") + "&force=1";
+                configuration.setShareLink(shareURL);
+            } catch (Exception e) {
+
+            }
+            view.addObject("configuration", configuration);
+        }
         return view;
     }
 
@@ -99,5 +113,12 @@ public class DistributeController {
         } else {
             response.getWriter().print("failure");
         }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/pay")
+    public ModelAndView pay() {
+        ModelAndView view = new ModelAndView();
+        view.setViewName("/distribute/pay");
+        return view;
     }
 }

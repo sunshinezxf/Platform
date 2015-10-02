@@ -4,5 +4,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
-    <bean id="writerController" class="platform.sunshine.controller.PlatformController"/>
+    <bean id="platformController" class="platform.sunshine.controller.PlatformController"/>
+
+    <bean id="accountController" class="platform.sunshine.controller.AccountController"/>
+
+    <bean id="articleController" class="platform.sunshine.controller.ArticleController"/>
+
+    <bean id="distributeController" class="platform.sunshine.controller.DistributeController"/>
+
+    <bean id="wechatController" class="platform.sunshine.controller.WechatController"/>
 </beans>

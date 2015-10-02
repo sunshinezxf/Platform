@@ -10,4 +10,6 @@ public interface DealService {
     public ResultData createDealRecord(Deal deal);
 
     public ResultData queryDealRecord(Deal deal);
+
+    public ResultData charge(Deal deal);
 }

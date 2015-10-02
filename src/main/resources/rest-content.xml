@@ -71,6 +71,7 @@
         <property name="unauthorizedUrl" value="/index"/>
         <property name="filterChainDefinitions">
             <value>
+                /wechat = anon
                 /distribute/** = anon
                 /material/** = anon
                 /index = anon
