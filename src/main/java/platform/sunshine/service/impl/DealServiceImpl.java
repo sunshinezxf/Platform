@@ -1,5 +1,6 @@
 package platform.sunshine.service.impl;
 
+import com.pingplusplus.Pingpp;
 import com.pingplusplus.model.Charge;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,13 +60,14 @@ public class DealServiceImpl implements DealService {
         params.put("currency", deal.getCurrency());
         params.put("subject", deal.getSubject());
         params.put("body", deal.getArticle().getTitle());
-        params.put("order_no", deal.getDealId());
+        params.put("order_no", deal.getOrderNo());
         params.put("channel", deal.getChannel());
         params.put("client_ip", deal.getClientIp());
         Map<String, String> app = new HashMap<String, String>();
         app.put("id", CommonValue.APP_ID);
         params.put("app", app);
         try {
+            Pingpp.apiKey = CommonValue.API_KEY;
             Charge charge = Charge.create(params);
             result.setData(charge);
         } catch (Exception e) {

@@ -1,5 +1,6 @@
 package platform.sunshine.controller;
 
+import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,13 @@ import platform.sunshine.model.*;
 import platform.sunshine.service.ArticleService;
 import platform.sunshine.service.DealService;
 import platform.sunshine.service.ReaderService;
+import platform.sunshine.utils.IPTool;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 import platform.sunshine.utils.WechatConfig;
 import platform.sunshine.vo.ArticleViewVO;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 
@@ -90,12 +91,13 @@ public class DistributeController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/reward")
     @ResponseBody
-    public void reward(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String reward(HttpServletRequest request) throws IOException {
+        logger.debug("=======reward======");
         String articleId = request.getParameter("articleId");
         String wechat = request.getParameter("wgateid");
         if (StringUtils.isEmpty(wechat)) {
-            response.getWriter().print("failure");
-            return;
+            logger.debug("wechat is empty, cannot call the charge successfully");
+            return "";
         } else {
             Reader reader = new Reader();
             reader.setReaderWechat(wechat);
@@ -106,19 +108,16 @@ public class DistributeController {
 
             }
         }
-        Deal deal = new Deal(wechat, articleId);
-        ResultData result = dealService.createDealRecord(deal);
+        String ip = IPTool.getIP(request);
+        Deal deal = new Deal(wechat, articleId, ip);
+//        ResultData result = dealService.createDealRecord(deal);
+        ResultData result = dealService.charge(deal);
         if (result.getResponseCode() == ResponseCode.RESPONSE_OK) {
-            response.getWriter().print("success");
+            logger.debug(JSONValue.toJSONString(result.getData()));
+            return JSONValue.toJSONString(result.getData());
         } else {
-            response.getWriter().print("failure");
+            logger.debug(result.getDescription());
+            return "";
         }
-    }
-
-    @RequestMapping(method = RequestMethod.GET, value = "/pay")
-    public ModelAndView pay() {
-        ModelAndView view = new ModelAndView();
-        view.setViewName("/distribute/pay");
-        return view;
     }
 }

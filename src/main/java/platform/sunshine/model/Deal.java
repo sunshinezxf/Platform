@@ -10,6 +10,7 @@ import java.sql.Timestamp;
  */
 public class Deal {
     private String dealId;
+    private String orderNo;
     private String subject;
     private Reader reader;
     private Article article;
@@ -35,12 +36,25 @@ public class Deal {
         this.dealId = Encryption.md5(readerWechat + articleId + createAt);
     }
 
+    public Deal(String readerWechat, String articleId, String ip) {
+        this(readerWechat, articleId);
+        this.clientIp = ip;
+    }
+
     public String getDealId() {
         return dealId;
     }
 
     public void setDealId(String dealId) {
         this.dealId = dealId;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
     public String getSubject() {
