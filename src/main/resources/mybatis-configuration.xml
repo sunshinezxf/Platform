@@ -8,5 +8,6 @@
         <mapper resource="platform/sunshine/mapper/article.xml"/>
         <mapper resource="platform/sunshine/mapper/reader.xml"/>
         <mapper resource="platform/sunshine/mapper/deal.xml"/>
+        <mapper resource="platform/sunshine/mapper/behavior.xml"/>
     </mappers>
 </configuration>

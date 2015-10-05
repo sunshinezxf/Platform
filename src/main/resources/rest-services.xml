@@ -11,4 +11,6 @@
     <bean id="readerService" class="platform.sunshine.service.impl.ReaderServiceImpl"/>
 
     <bean id="dealService" class="platform.sunshine.service.impl.DealServiceImpl"/>
+
+    <bean id="analyseService" class="platform.sunshine.service.impl.AnalyseServiceImpl"/>
 </beans>

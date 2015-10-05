@@ -13,4 +13,6 @@
     <bean id="distributeController" class="platform.sunshine.controller.DistributeController"/>
 
     <bean id="wechatController" class="platform.sunshine.controller.WechatController"/>
+
+    <bean id="analyseController" class="platform.sunshine.controller.AnalyseController"/>
 </beans>

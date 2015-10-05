@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="behavior">
+
+    <!-- insert user behavior -->
+    <insert id="insertBehavior" parameterType="platform.sunshine.model.Behavior" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO platform_behavior(platform_behavior_id, platform_article_id, platform_reader_wechat, platform_behavior_ip, platform_behavior_operation, platform_behavior_status, create_time, del_flag)
+        VALUES (#{behaviourId}, #{articleId}, #{wechat}, #{clientIp}, #{operation}, #{status}, #{createAt}, 0)
+    </insert>
+</mapper>

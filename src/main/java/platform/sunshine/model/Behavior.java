@@ -1,5 +1,8 @@
 package platform.sunshine.model;
 
+import platform.sunshine.form.OperationForm;
+import platform.sunshine.utils.Encryption;
+
 import java.sql.Timestamp;
 
 /**
@@ -9,11 +12,24 @@ public class Behavior {
     private String behaviourId;
     private String articleId;
     private String wechat;
+    private String clientIp;
     private String operation;
     private String status;
     private Timestamp createAt;
 
-    public Behav
+    public Behavior() {
+        this.createAt = new Timestamp(System.currentTimeMillis());
+    }
+
+    public Behavior(OperationForm form, String clientIp) {
+        this();
+        this.articleId = form.getArticleId();
+        this.wechat = form.getWgateid();
+        this.clientIp = clientIp;
+        this.operation = form.getOperation();
+        this.status = form.getStatus();
+        this.behaviourId = Encryption.md5(wechat + articleId + createAt);
+    }
 
     public String getBehaviourId() {
         return behaviourId;
@@ -37,6 +53,14 @@ public class Behavior {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getClientIp() {
+        return clientIp;
+    }
+
+    public void setClientIp(String clientIp) {
+        this.clientIp = clientIp;
     }
 
     public String getOperation() {
