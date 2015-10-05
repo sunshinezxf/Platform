@@ -29,6 +29,7 @@
         <result property="dealId" column="platform_deal_id"/>
         <result property="dealPayment" column="platform_deal_payment"/>
         <result property="dealStatus" column="platform_deal_status"/>
+        <result property="clientIp" column="platform_deal_ip"/>
         <result property="createAt" column="create_time"/>
         <association property="reader" column="platform_reader_wechat" javaType="platform.sunshine.model.Reader"
                      resultMap="readerVo"/>
@@ -39,13 +40,13 @@
     <!-- 插入一条打赏纪录 -->
     <insert id="insertDeal" parameterType="platform.sunshine.model.Deal" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO platform_deal(platform_deal_id, platform_reader_wechat, platform_article_id, platform_deal_payment,
-        platform_deal_status, create_time, del_flag)
-        VALUES (#{dealId}, #{reader.readerWechat}, #{article.articleId}, #{dealPayment}, #{dealStatus}, #{createAt}, 0)
+        platform_deal_status, platform_deal_ip, create_time, del_flag)
+        VALUES (#{dealId}, #{reader.readerWechat}, #{article.articleId}, #{dealPayment}, #{dealStatus}, #{clientIp}, #{createAt}, 0)
     </insert>
 
     <!-- 根据条件查询纪录 -->
     <select id="queryDeal" parameterType="platform.sunshine.model.Deal" resultMap="dealVo">
-        SELECT pd.platform_deal_id, pd.platform_deal_payment, pd.platform_deal_status, pd.create_time,
+        SELECT pd.platform_deal_id, pd.platform_deal_payment, pd.platform_deal_status, pd.platform_deal_ip, pd.create_time,
         pr.platform_reader_wechat platform_reader_wechat, par.platform_article_id platform_article_id,
         par.platform_article_title, par.platform_article_author, par.platform_article_guidance,
         par.platform_article_content, par.create_time, pac.platform_account_id platform_account_id,

@@ -1,6 +1,5 @@
 package platform.sunshine.controller;
 
-import org.json.simple.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,11 +91,9 @@ public class DistributeController {
     @RequestMapping(method = RequestMethod.POST, value = "/reward")
     @ResponseBody
     public String reward(HttpServletRequest request) throws IOException {
-        logger.debug("=======reward======");
         String articleId = request.getParameter("articleId");
         String wechat = request.getParameter("wgateid");
         if (StringUtils.isEmpty(wechat)) {
-            logger.debug("wechat is empty, cannot call the charge successfully");
             return "";
         } else {
             Reader reader = new Reader();
@@ -105,19 +102,20 @@ public class DistributeController {
             if (readerExistMessage.getResponseCode() == ResponseCode.RESPONSE_NULL) {
                 readerService.createReader(reader);
             } else if (readerExistMessage.getResponseCode() == ResponseCode.RESPONSE_ERROR) {
-
+                return "";
             }
         }
         String ip = IPTool.getIP(request);
-        Deal deal = new Deal(wechat, articleId, ip);
-//        ResultData result = dealService.createDealRecord(deal);
-        ResultData result = dealService.charge(deal);
-        if (result.getResponseCode() == ResponseCode.RESPONSE_OK) {
-            logger.debug(JSONValue.toJSONString(result.getData()));
-            return JSONValue.toJSONString(result.getData());
-        } else {
-            logger.debug(result.getDescription());
-            return "";
+        Deal deal = new Deal(wechat, articleId);
+        deal.setClientIp(ip);
+        if (dealService.queryDealRecord(deal).getResponseCode() == ResponseCode.RESPONSE_NULL) {
+            ResultData result = dealService.createDealRecord(deal);
+            if (result.getResponseCode() == ResponseCode.RESPONSE_OK) {
+                return "success";
+            } else {
+                return "";
+            }
         }
+        return "";
     }
 }

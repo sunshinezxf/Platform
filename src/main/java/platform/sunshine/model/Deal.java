@@ -36,11 +36,6 @@ public class Deal {
         this.dealId = Encryption.md5(readerWechat + articleId + createAt);
     }
 
-    public Deal(String readerWechat, String articleId, String ip) {
-        this(readerWechat, articleId);
-        this.clientIp = ip;
-    }
-
     public String getDealId() {
         return dealId;
     }
