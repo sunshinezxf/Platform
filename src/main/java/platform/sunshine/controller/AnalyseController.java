@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import platform.sunshine.form.OperationForm;
 import platform.sunshine.model.Behavior;
 import platform.sunshine.service.AnalyseService;
-import platform.sunshine.utils.IPTool;
+import platform.sunshine.utils.Tools;
 import platform.sunshine.utils.ResponseCode;
 import platform.sunshine.utils.ResultData;
 
@@ -30,7 +30,7 @@ public class AnalyseController {
     @RequestMapping(method = RequestMethod.POST, value = "/operate")
     @ResponseBody
     public String operate(OperationForm operationForm, HttpServletRequest request) {
-        String ip = IPTool.getIP(request);
+        String ip = Tools.getIP(request);
         Behavior behavior = new Behavior(operationForm, ip);
         ResultData result = analyseService.createReaderOperation(behavior);
         return result.getResponseCode() == ResponseCode.RESPONSE_OK ? "success" : "failure";

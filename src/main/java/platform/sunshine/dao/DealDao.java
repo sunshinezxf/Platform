@@ -10,4 +10,6 @@ public interface DealDao {
     public ResultData insertDeal(Deal deal);
 
     public ResultData queryDeal(Deal deal);
+
+    public ResultData updateDeal(Deal deal);
 }

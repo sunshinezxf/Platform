@@ -1,5 +1,6 @@
 package platform.sunshine.service;
 
+import platform.sunshine.form.ChargeForm;
 import platform.sunshine.model.Deal;
 import platform.sunshine.utils.ResultData;
 
@@ -11,5 +12,7 @@ public interface DealService {
 
     public ResultData queryDealRecord(Deal deal);
 
-    public ResultData charge(Deal deal);
+    public ResultData charge(ChargeForm form);
+
+    public ResultData updateDealRecord(Deal deal);
 }

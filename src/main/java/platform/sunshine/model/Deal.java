@@ -1,6 +1,5 @@
 package platform.sunshine.model;
 
-import platform.sunshine.utils.CommonValue;
 import platform.sunshine.utils.Encryption;
 
 import java.sql.Timestamp;
@@ -10,22 +9,16 @@ import java.sql.Timestamp;
  */
 public class Deal {
     private String dealId;
-    private String orderNo;
-    private String subject;
     private Reader reader;
     private Article article;
-    private double dealPayment;
-    private String currency;
-    private String channel;
+    private int dealPayment;
     private boolean dealStatus;
     private Timestamp createAt;
     private String clientIp;
 
     public Deal() {
-        subject = CommonValue.DEAL_SUBJECT;
         reader = new Reader();
         article = new Article();
-        currency = CommonValue.DEAL_CURRENCY;
         this.createAt = new Timestamp(System.currentTimeMillis());
     }
 
@@ -44,22 +37,6 @@ public class Deal {
         this.dealId = dealId;
     }
 
-    public String getOrderNo() {
-        return orderNo;
-    }
-
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
     public Reader getReader() {
         return reader;
     }
@@ -76,28 +53,12 @@ public class Deal {
         this.article = article;
     }
 
-    public double getDealPayment() {
+    public int getDealPayment() {
         return dealPayment;
     }
 
-    public void setDealPayment(double dealPayment) {
+    public void setDealPayment(int dealPayment) {
         this.dealPayment = dealPayment;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
-    public String getChannel() {
-        return channel;
-    }
-
-    public void setChannel(String channel) {
-        this.channel = channel;
     }
 
     public boolean isDealStatus() {

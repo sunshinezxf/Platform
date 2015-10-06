@@ -49,4 +49,21 @@ public class DealDaoImpl extends BaseDao implements DealDao {
             return result;
         }
     }
+
+    @Override
+    public ResultData updateDeal(Deal deal) {
+        ResultData result = new ResultData();
+        try {
+            int row = sqlSession.update("deal.updateDeal", deal);
+            if (row == 0) {
+                result.setResponseCode(ResponseCode.RESPONSE_NULL);
+                logger.debug("record with deal id: " + deal.getDealId() + "does not exist.");
+            }
+        } catch (Exception e) {
+            result.setResponseCode(ResponseCode.RESPONSE_OK);
+            logger.error(e.getMessage());
+        } finally {
+            return result;
+        }
+    }
 }

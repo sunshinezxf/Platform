@@ -17,4 +17,6 @@ public class CommonValue {
     public final static String DEAL_CURRENCY = "cny";
 
     public final static String DEAL_SUBJECT = "文章打赏阅读";
+
+    public final static String DEAL_ALIPAY_WAP = "alipay_wap";
 }

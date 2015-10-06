@@ -46,7 +46,8 @@
 
     <!-- 根据条件查询纪录 -->
     <select id="queryDeal" parameterType="platform.sunshine.model.Deal" resultMap="dealVo">
-        SELECT pd.platform_deal_id, pd.platform_deal_payment, pd.platform_deal_status, pd.platform_deal_ip, pd.create_time,
+        SELECT pd.platform_deal_id, pd.platform_deal_payment, pd.platform_deal_status, pd.platform_deal_ip,
+        pd.create_time,
         pr.platform_reader_wechat platform_reader_wechat, par.platform_article_id platform_article_id,
         par.platform_article_title, par.platform_article_author, par.platform_article_guidance,
         par.platform_article_content, par.create_time, pac.platform_account_id platform_account_id,
@@ -63,4 +64,11 @@
             AND par.platform_article_id = #{article.articleId}
         </if>
     </select>
+
+    <!-- 更新一条打赏记录 -->
+    <update id="updateDeal" parameterType="platform.sunshine.model.Deal">
+        UPDATE platform_deal
+        SET platform_deal_status = #{dealStatus}
+        WHERE platform_deal_id = #{dealId}
+    </update>
 </mapper>
