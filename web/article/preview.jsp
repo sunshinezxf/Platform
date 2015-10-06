@@ -41,7 +41,7 @@
                 flag = true;
             }
         });
-        $("#reward").click(function () {
+        $("#pay").click(function () {
             var url = "${path.concat('/article/detail')}";
             $.post(url, function (result) {
                 if (result == "success") {

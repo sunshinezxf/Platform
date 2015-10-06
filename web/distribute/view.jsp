@@ -28,10 +28,89 @@
             src="${path.concat('/material/plugins/jquery/jquery-1.11.3.min.js')}"></script>
     <script type="text/javascript"
             src="${path.concat('/material/plugins/bootstrap-3.3.5-dist/js/bootstrap.js')}"></script>
-    <script type="text/javascript" src="${path.concat('/material/plugins/pingpp-html5-one/pingpp_one.js')}"></script>
     <script type="text/javascript" src="${path.concat('/material/plugins/wechat/jwexin-1.0.0.js')}"></script>
+    <script type="text/javascript" src="${path.concat('/material/js/analysis.js')}"></script>
     <title>${vo.article.title}</title>
 </head>
+<body>
+<div class="container">
+    <section id="article">
+        <c:set var="paymentstatus" value="<%=ArticlePaymentStatus.ARTICLE_PAYED %>"></c:set>
+        <div class="blog-post">
+            <h3 class="blog-post-title">${vo.article.title}</h3>
+
+            <div class="blog-post-meta"><a>${vo.article.author}</a> <fmt:formatDate value="${vo.article.createAt}"
+                                                                                    pattern="yyyy年MM月dd日"/></div>
+            <div class="blog-post-preview">
+                <div class="alert alert-info blog-post-guidance">
+                    <span class="label label-info" id="article-guidance">文章导读
+                    </span>
+
+                    <div id="article-guidance-content"
+                            <c:if test="${vo.paymentStatus eq paymentstatus}">
+                                style="display:none;"
+                            </c:if>>
+                        <hr/>
+                        ${vo.article.guidance}
+                    </div>
+                </div>
+                <c:if test="${vo.paymentStatus ne paymentstatus}">
+                    <div class="btn-group" style="width: 100%;">
+                        <button class="alert alert-success" style="width: 100%;" id="pay">打赏继续阅读 &gt;&gt;</button>
+                    </div>
+                </c:if>
+            </div>
+            <c:if test="${vo.paymentStatus eq paymentstatus}">
+                <div class="blog-post-detail">
+                    <div class="alert alert-info blog-post-content">
+                        <span class="label label-info" id="article-content">文章正文</span>
+
+                        <div id="article-detail-content">
+                            <hr/>
+                                ${vo.article.content}
+                        </div>
+                    </div>
+                </div>
+            </c:if>
+        </div>
+    </section>
+</div>
+</body>
+<script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>
+<script>
+    var url = window.location.href;
+    var articleId = "${vo.article.articleId}";
+    var wgateid = "${wgateid}";
+    document.getElementById('pay').addEventListener('click', function () {
+        pingpp_one.init({
+            app_id: 'app_0erj5GTC0yjHKCGK',                     //该应用在ping++的应用ID
+            amount: 100,                                   //订单价格，单位：人民币 分
+            // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序
+            // upmp_wap 渠道在微信内部无法使用，若用户未安装银联手机支付控件，则无法调起支付
+            channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],
+            charge_url: 'http://www.njuat.com/distribute/charge',  //商户服务端创建订单的url
+            charge_param: {articleId: articleId, wgateid: wgateid, url: url},                      //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)
+            open_id: 'openid'                             //(可选，使用微信公众号支付时必须传入)
+        }, function (res) {
+            if (!res.status) {
+                //处理错误
+                alert(res.msg);
+            }
+            else {
+                //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，调用 pingpp_one.success 方法，你也可以自己定义回调函数
+                //其他渠道的处理方法请见第 2 节
+                pingpp_one.success(function (res) {
+                    if (!res.status) {
+                        alert(res.msg);
+                    }
+                }, function () {
+                    //这里处理支付成功页面点击“继续购物”按钮触发的方法，例如：若你需要点击“继续购物”按钮跳转到你的购买页，则在该方法内写入 window.location.href = "你的购买页面 url"
+                    window.location.href = url;//示例
+                });
+            }
+        });
+    });
+</script>
 <script type="text/javascript">
 
     wx.config({
@@ -111,101 +190,6 @@
                 flag = true;
             }
         });
-        $("#reward").click(function () {
-            $("#reward").attr("disabled", "disabled");
-            var articleId = "${vo.article.articleId}";
-            var url = "${path.concat('/distribute/reward')}";
-            var wgateid = WgateJs.getWgateid();
-            $.post(url, {articleId: articleId, wgateid: wgateid}, function (result) {
-                if (result == "success") {
-                    location.reload();
-                } else {
-                    $("reward").removeAttr("disabled");
-                }
-            });
-        });
     });
 </script>
-<body>
-<div class="container">
-    <section id="article">
-        <c:set var="paymentstatus" value="<%=ArticlePaymentStatus.ARTICLE_PAYED %>"></c:set>
-        <div class="blog-post">
-            <h3 class="blog-post-title">${vo.article.title}</h3>
-
-            <div class="blog-post-meta"><a>${vo.article.author}</a> <fmt:formatDate value="${vo.article.createAt}"
-                                                                                    pattern="yyyy年MM月dd日"/></div>
-            <div class="blog-post-preview">
-                <div class="alert alert-info blog-post-guidance">
-                    <span class="label label-info" id="article-guidance">文章导读
-                    </span>
-
-                    <div id="article-guidance-content"
-                            <c:if test="${vo.paymentStatus eq paymentstatus}">
-                                style="display:none;"
-                            </c:if>>
-                        <hr/>
-                        ${vo.article.guidance}
-                    </div>
-                </div>
-                <c:if test="${vo.paymentStatus ne paymentstatus}">
-                    <div class="btn-group" style="width: 100%;">
-                        <button class="alert alert-success" style="width: 100%;" id="reward">打赏继续阅读 &gt;&gt;</button>
-                    </div>
-                </c:if>
-            </div>
-            <c:if test="${vo.paymentStatus eq paymentstatus}">
-                <div class="blog-post-detail">
-                    <div class="alert alert-info blog-post-content">
-                        <span class="label label-info" id="article-content">文章正文</span>
-
-                        <div id="article-detail-content">
-                            <hr/>
-                                ${vo.article.content}
-                        </div>
-                    </div>
-                </div>
-            </c:if>
-        </div>
-    </section>
-</div>
-</body>
-<%--<script type="text/javascript" src="https://one.pingxx.com/lib/pingpp_one.js"></script>--%>
-<%--<script>--%>
-<%--//    var articleId = "${vo.article.articleId}";--%>
-<%--//    var wgateid = WgateJs.getWgateid();--%>
-<%--//    var current = new Date();--%>
-<%--//    var orderNo = current.toDateString() + wgateid + current.toTimeString();--%>
-<%--//    document.getElementById('pay').addEventListener('click', function () {--%>
-<%--//        pingpp_one.init({--%>
-<%--//            app_id: 'app_0erj5GTC0yjHKCGK',                     //该应用在ping++的应用ID--%>
-<%--//            order_no: orderNo,                     //订单在商户系统中的订单号--%>
-<%--//            amount: 10,                                   //订单价格，单位：人民币 分--%>
-<%--//            // 壹收款页面上需要展示的渠道，数组，数组顺序即页面展示出的渠道的顺序--%>
-<%--//            // upmp_wap 渠道在微信内部无法使用，若用户未安装银联手机支付控件，则无法调起支付--%>
-<%--//            channel: ['alipay_wap', 'wx_pub', 'upacp_wap', 'yeepay_wap', 'jdpay_wap', 'bfb_wap'],--%>
-<%--//            charge_url: 'http://www.njuat.com/reward',  //商户服务端创建订单的url--%>
-<%--//            charge_param: {articleId: articleId, wgateid: wgateid},                      //(可选，用户自定义参数，若存在自定义参数则壹收款会通过 POST 方法透传给 charge_url)--%>
-<%--//            open_id: 'wx7ba6d2f313ff5d53'                             //(可选，使用微信公众号支付时必须传入)--%>
-<%--//        }, function (res) {--%>
-<%--//            if (!res.status) {--%>
-<%--//                //处理错误--%>
-<%--//                alert(res.msg);--%>
-<%--//            }--%>
-<%--//            else {--%>
-<%--//                //若微信公众号渠道需要使用壹收款的支付成功页面，则在这里进行成功回调，调用 pingpp_one.success 方法，你也可以自己定义回调函数--%>
-<%--//                //其他渠道的处理方法请见第 2 节--%>
-<%--//                pingpp_one.success(function (res) {--%>
-<%--//                    if (!res.status) {--%>
-<%--//                        alert(res.msg);--%>
-<%--//                    }--%>
-<%--//                }, function () {--%>
-<%--//                    //这里处理支付成功页面点击“继续购物”按钮触发的方法，例如：若你需要点击“继续购物”按钮跳转到你的购买页，则在该方法内写入 window.location.href = "你的购买页面 url"--%>
-<%--//                    window.location.href = 'http://www.njuat.com';//示例--%>
-<%--//                });--%>
-<%--//            }--%>
-<%--//        });--%>
-<%--//    });--%>
-<%--</script>--%>
-<script type="text/javascript" src="${path.concat('/material/js/analysis.js')}"></script>
 </html>
